@@ -1,11 +1,11 @@
 {
-  "name": "boilerplate",
+  "name": "News-HeadLines",
   "version": "1.0.0",
-  "description": "Simple react app",
+  "description": "A news headline app",
   "main": "index.js",
   "scripts": {
     "test": "karma start",
-    "start": "node server.js"
+    "start": "babel-node --presets es2015 server.js"
   },
   "author": "Andrew Mead",
   "license": "MIT",
