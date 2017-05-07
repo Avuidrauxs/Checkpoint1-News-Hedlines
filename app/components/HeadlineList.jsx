@@ -7,13 +7,16 @@ export default class HeadlineList extends React.Component{
     super(props)
 
   }
+  handleGoToArticles(url){
+    alert('I will go to ' + url);
+  }
 
   render(){
     const {sources} = this.props;
     const renderHeadlines = ()=>{
       return sources.map((source)=>{
         return (
-          <HeadlineItem key={source.id} {...source}/>
+          <HeadlineItem key={source.id} {...source} onClickURL={this.handleGoToArticles}/>
         )
       });
     }

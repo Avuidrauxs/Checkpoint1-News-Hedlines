@@ -66,12 +66,13 @@ export default class NewsHome extends React.Component{
 
   }
 
+
   render(){
 
 return(
 <div>
     <HeadlineList sources={this.state.newsSources}/>
-    
+
 </div>)
   }
 
