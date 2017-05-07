@@ -1,0 +1,30 @@
+import React from 'react';
+
+export default class HeadlineSearch extends React.Component{
+
+  constructor(props){
+    super(props)
+  }
+  handleSearch(){
+    const showWorldNews = this.refs.showWorldNews.checked;
+    const searchText = this.refs.searchText.value;
+
+    this.props.onSearch(showWorldNews,searchText);
+  }
+  render(){
+    return(
+    <div>
+      <div>
+        <input type='text' placeholder='Enter a news source you want' ref='searchText' onChange={this.handleSearch.bind(this)}/>
+      </div>
+      <div>
+        <label>
+        <input type='checkbox' ref='showWorldNews' onChange={this.handleSearch.bind(this)}/>
+        Show World News
+        </label>
+      </div>
+    </div>
+    )
+  }
+
+}
