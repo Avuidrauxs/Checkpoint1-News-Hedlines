@@ -1,15 +1,25 @@
-import React from 'react':
+import React from 'react';
+import HeadlineItem from './HeadlineItem';
 
-export default HeadlineList extends React.Component{
+export default class HeadlineList extends React.Component{
 
   constructor(props){
-    super()
+    super(props)
+
   }
 
   render(){
+    const {sources} = this.props;
+    const renderHeadlines = ()=>{
+      return sources.map((source)=>{
+        return (
+          <HeadlineItem key={source.id} {...source}/>
+        )
+      });
+    }
     return (
       <div>
-        test
+        {renderHeadlines()}
       </div>
     )
   }

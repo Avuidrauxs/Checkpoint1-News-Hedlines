@@ -1,15 +1,18 @@
-import React from 'react':
+import React from 'react';
 
-export default HeadlineItem extends React.Component{
+export default class HeadlineItem extends React.Component{
 
   constructor(props){
-    super()
+    super(props)
   }
 
   render(){
+    const { title, description, url } = this.props;
     return (
       <div>
-        test
+        <h4>{title}</h4>
+        <p>{description}.</p>
+        <a href={url} target='blank'>More Info</a>
       </div>
     )
   }
