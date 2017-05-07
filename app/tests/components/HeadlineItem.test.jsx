@@ -7,7 +7,7 @@ import $ from 'jQuery';
 import HeadlineItem from '../../components/HeadlineItem';
 
 describe('Headline', ()=>{
-  it('shoild exist', ()=>{
+  it('should exist', ()=>{
     expect(HeadlineItem).toExist();
   });
 });

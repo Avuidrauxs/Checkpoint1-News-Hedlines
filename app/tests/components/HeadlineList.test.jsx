@@ -8,7 +8,7 @@ import HeadlineList from '../../components/HeadlineList';
 import HeadlineItem from '../../components/HeadlineItem';
 
 describe('Headlines List', ()=>{
-  it('shoild exist', ()=>{
+  it('should exist', ()=>{
     expect(HeadlineList).toExist();
   });
   it('should render one or more Headline components for each news source',()=>{

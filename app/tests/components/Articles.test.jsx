@@ -4,10 +4,10 @@ import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 import $ from 'jQuery';
 
-import NewsHome from '../../components/NewsHome';
+import Articles from '../../components/Articles';
 
-describe('News Home', ()=>{
+describe('Articles', ()=>{
   it('should exist', ()=>{
-    expect(NewsHome).toExist();
+    expect(Articles).toExist();
   })
 })

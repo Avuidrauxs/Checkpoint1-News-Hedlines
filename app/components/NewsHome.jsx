@@ -63,11 +63,8 @@ export default class NewsHome extends React.Component {
     this.setState({showWorldNews: showWorldNews, searchText: searchText.toLowerCase()})
 
   }
-  renderArticles(){
-    this.state.articles.map((article)=>{
-      //console.log(article);
-      return <Articles key={article.id} title={article.title} description={article.description} url={article.url}/>
-    });
+  componentDidMount(){
+
   }
   getAllNews() {
     NewsAPI.getNews().then(res => {
@@ -77,6 +74,17 @@ export default class NewsHome extends React.Component {
     }, err => {
       console.log(err);
     });
+  }
+  renderArticles(source){
+    NewsAPI.getSources(source).then((res) => {
+        const articles = res;
+        callback(res)
+        this.setState({ articles: articles});
+        console.log(sources);
+      },err => {
+        console.log(err);
+      });
+
   }
   render() {
     const {newsSources, showWorldNews,searchText} = this.state;
@@ -89,13 +97,13 @@ export default class NewsHome extends React.Component {
 
           <div className='column small-right small-11 medium-6 large-5'>
             <div className='container'>
-              <HeadlineSearch onSearch={this.handleSearch.bind(this)}/>
+              <HeadlineSearch onSearch={this.handleSearch.bind(this)} />
               <HeadlineList sources={filteredSearch}/>
             </div>
           </div>
 
           {this.state.articles.map((article)=>{
-            //console.log(article);
+
             return <Articles key={article.id} title={article.title} description={article.description} url={article.url}/>
           })}
 
