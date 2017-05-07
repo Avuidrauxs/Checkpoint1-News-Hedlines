@@ -7,10 +7,10 @@ export default class HeadlineItem extends React.Component{
   }
 
   render(){
-    const { title, description, url } = this.props;
+    const { name, description, url } = this.props;
     return (
       <div>
-        <h4>{title}</h4>
+        <h4>{name}</h4>
         <p>{description}.</p>
         <a href={url} target='blank'>More Info</a>
       </div>
