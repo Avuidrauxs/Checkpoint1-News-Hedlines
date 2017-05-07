@@ -13,7 +13,7 @@ export default class HeadlineSearch extends React.Component{
   }
   render(){
     return(
-    <div>
+    <div className='container__header'>
       <div>
         <input type='text' placeholder='Enter a news source you want' ref='searchText' onChange={this.handleSearch.bind(this)}/>
       </div>
