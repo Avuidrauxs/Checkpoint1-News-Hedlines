@@ -9,5 +9,5 @@ import HeadlineItem from '../../components/HeadlineItem';
 describe('Headline', ()=>{
   it('shoild exist', ()=>{
     expect(HeadlineItem).toExist();
-  })
-})
+  });
+});
