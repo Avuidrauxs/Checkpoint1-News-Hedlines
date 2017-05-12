@@ -2,16 +2,25 @@ import React from "react";
 
 export default class Articles extends React.Component {
   render() {
-    const { title, description, url } = this.props;
+    const { title, description, url , urlToImage,author,publishedAt} = this.props;
 
     return (
-      <div className='column large-left small-11 medium-6 '>
-        <div className=''>
-          <h4>{title}</h4>
-          <p>{description}.</p>
-          <a className='button' href={url} target='blank'>More Info</a>
+
+      <a href={url}>
+      <article className="article-row">
+        <div classclassName="article-row-img">
+          <img src={urlToImage} alt="picture of a whale eating a donkey" />
         </div>
-      </div>
+        <div classclassName="article-row-content">
+          <h1 classclassName="article-row-content-header">{title}</h1>
+
+          <p classclassName="article-row-content-description">{description}</p>
+
+          <p classclassName="article-row-content-author">{author}</p>
+          <time classclassName="article-row-content-time" dateTime={true}>{publishedAt}</time>
+        </div>
+      </article>
+    </a>
 
     );
   }

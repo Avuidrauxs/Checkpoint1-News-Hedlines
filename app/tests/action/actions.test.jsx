@@ -14,15 +14,21 @@ describe('Actions',()=>{
   it('should fetch articles when source is entered',()=>{
     const action = {
       type:'FETCH_ARTICLES',
-      source: 'cnn'
+      articles: [{
+        name: 'CNN',
+        id: 2
+      }]
     };
-    const res = fetchArticles(action.source);
+    const res = fetchArticles(action.articles);
     expect(res).toEqual(action);
   });
   it('should fetch all the news sources',()=>{
-    const action = {type:"GET_ALL_NEWS"}
+    const action = {
+      type:"GET_ALL_NEWS",
+      sources:[]
+    }
     const res = getAllNews();
 
-    expect(res).toEqual(action);
+    expect(res.type).toEqual(action.type);
   })
 })

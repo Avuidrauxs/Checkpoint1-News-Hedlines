@@ -2,9 +2,11 @@ import React from 'react';
 import HeadlineList from './HeadlineList';
 import NewsAPI from '../api/NewsAPI';
 import HeadlineSearch from './HeadlineSearch';
-import Articles from './Articles'
+import Articles from './Articles';
+import {fetchNewsFinal,fetchAllArticles} from 'actions';
+import {connect} from 'react-redux';
 
-export default class NewsHome extends React.Component {
+class NewsHome extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -39,7 +41,9 @@ export default class NewsHome extends React.Component {
       ]
     };
     //This fetches all the news sources from newsapi.org
-    this.getAllNews();
+    //this.getAllNews();
+
+
   }
   filteredSearch(newsSources,showWorldNews,searchText){
     let filteredSearch = newsSources;
@@ -87,7 +91,12 @@ export default class NewsHome extends React.Component {
 
   }
   render() {
-    const {newsSources, showWorldNews,searchText} = this.state;
+    const {showWorldNews,searchText} = this.state;
+    const {dispatch,newsSources,articles} = this.props;
+    dispatch(fetchNewsFinal());
+    //dispatch(fetchAllArticles('ign'));
+    //console.log(articles);
+
     const filteredSearch = this.filteredSearch(newsSources,showWorldNews,searchText);
     return (
       <div>
@@ -102,9 +111,10 @@ export default class NewsHome extends React.Component {
             </div>
           </div>
 
-          {this.state.articles.map((article)=>{
+          {articles.map((article)=>{
 
-            return <Articles key={article.id} title={article.title} description={article.description} url={article.url}/>
+            return <Articles key={article.id} title={article.title} description={article.description}
+              url={article.url} publishedAt={article.publishedAt} urlToImage={article.urlToImage} author={article.author}/>
           })}
 
 
@@ -116,3 +126,10 @@ export default class NewsHome extends React.Component {
   }
 
 }
+export default connect(
+  (state)=>{
+  return{
+    newsSources:state.getAllNews,
+    articles: state.fetchArticles
+  }
+})(NewsHome)

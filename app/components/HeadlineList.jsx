@@ -1,18 +1,19 @@
 import React from 'react';
 import HeadlineItem from './HeadlineItem';
+import {connect} from 'react-redux';
 
-export default class HeadlineList extends React.Component{
+class HeadlineList extends React.Component{
 
   constructor(props){
     super(props)
 
   }
   handleGoToArticles(url){
-    alert('I will go to ' + url);
+    alert('You are about to go ' + url);
   }
 
   render(){
-    const {sources} = this.props;
+    const {sources,dispatch} = this.props;
     const renderHeadlines = ()=>{
       return sources.map((source)=>{
         return (
@@ -28,3 +29,9 @@ export default class HeadlineList extends React.Component{
   }
 
 }
+export default connect()(HeadlineList)
+//   (state)=>{
+//     return {
+//       sources: state.sources
+//     }
+// })(HeadlineList)
