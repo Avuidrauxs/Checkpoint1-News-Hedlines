@@ -19,12 +19,12 @@ export default class HeadlineSearch extends React.Component{
       </div>
       <div>
         <label>
-        <input type='radio' ref='Top' checked={true} onChange={this.handleSearch.bind(this)}/>
-        Show World News
+        <input type='checkbox' ref='Top' onChange={this.handleSearch.bind(this)}/>
+        Top Headlines
         </label>
         <label>
-        <input type='radio' ref='Latest' onChange={this.handleSearch.bind(this)}/>
-        Show World News
+        <input type='checkbox' ref='Latest' onChange={this.handleSearch.bind(this)}/>
+        Latest Headlines
         </label>
       </div>
     </div>

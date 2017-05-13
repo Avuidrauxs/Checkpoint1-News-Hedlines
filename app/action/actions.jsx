@@ -29,13 +29,13 @@ export const fetchNewsFinal = ()=>{
     const encodedCategory = encodeURIComponent();
     const requestUrl = `${NEWS_API_URL}` //&category=${encodedCategory}`;
 
-    axios.get(requestUrl).then(function(res){
+    axios.get(requestUrl).then((res)=>{
       if(res.data.status === 'ok' && res.data.sources === []){
         throw new Error('Error no news');
       }else {
         dispatch(getAllNews(res.data.sources))
       }
-    },function(res){
+    },(err)=>{
       throw new Error('Error no news')
     })
 
@@ -47,14 +47,14 @@ export const fetchAllArticles = (category)=>{
   const encodedCategory = encodeURIComponent(category);
   const requestUrl = `${NEWS_API_URL_SOURCES}&source=${encodedCategory}`;
 
-  return axios.get(requestUrl).then(function(res){
+  axios.get(requestUrl).then((res)=>{
     if(res.data.status === 'ok' && res.data.articles === []){
       throw new Error('Error no news');
     }else {
       //return res.data.articles;
       dispatch(fetchArticles(res.data.articles))
     }
-  },function(res){
+  },(err)=>{
     throw new Error('Error no news')
   })
   }
