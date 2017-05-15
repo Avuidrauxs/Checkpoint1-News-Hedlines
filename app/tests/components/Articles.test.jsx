@@ -6,8 +6,8 @@ import $ from 'jQuery';
 
 import Articles from '../../components/Articles';
 
-describe('Articles', ()=>{
-  it('should exist', ()=>{
+describe('Articles', () => {
+  it('should exist', () => {
     expect(Articles).toExist();
-  })
-})
+  });
+});

@@ -1,13 +1,15 @@
-import {createStore, compose, combineReducers,applyMiddleware} from 'redux';
-const thunk = require ('redux-thunk').default;
-import {searchTextReducer,getAllNewsReducer,fetchArticlesReducer} from 'reducers';
+import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
+import { searchTextReducer, getAllNewsReducer, fetchArticlesReducer, googleSignInReducer } from 'reducers';
 
-export const configureStore =()=>{
+const thunk = require('redux-thunk').default;
+
+export const configureStore =() => {
   const reducer = combineReducers({
     searchText: searchTextReducer,
     getAllNews: getAllNewsReducer,
-    fetchArticles: fetchArticlesReducer
-    });
+    fetchArticles: fetchArticlesReducer,
+    googleSignIn: googleSignInReducer
+  });
 
   const store = createStore(reducer,
   compose(applyMiddleware(thunk),
@@ -16,4 +18,4 @@ export const configureStore =()=>{
   : f => f));
 
   return store;
-}
+};

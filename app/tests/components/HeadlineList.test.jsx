@@ -7,8 +7,8 @@ import $ from 'jQuery';
 import HeadlineList from '../../components/HeadlineList';
 import HeadlineItem from '../../components/HeadlineItem';
 
-describe('Headlines List', ()=>{
-  it('should exist', ()=>{
+describe('Headlines List', () => {
+  it('should exist', () => {
     expect(HeadlineList).toExist();
   });
   it('should render one or more Headline components for each news source',()=>{
