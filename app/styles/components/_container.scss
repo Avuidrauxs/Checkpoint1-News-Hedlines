@@ -4,9 +4,19 @@
   border-radius: 5px;
   padding: 2rem;
   margin-bottom: 2rem;
-  
-}
 
+}
+.container-hybrid{
+  background: $light-grey;
+  border: 1px solid $light-grey-border;
+  border-radius: 5px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  overflow: scroll;
+
+   height: 100rem;
+
+}
 .container__header{
   border-bottom: 1px solid $light-grey-border;
   padding: 1rem;

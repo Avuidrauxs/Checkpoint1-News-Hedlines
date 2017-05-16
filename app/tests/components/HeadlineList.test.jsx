@@ -11,7 +11,7 @@ describe('Headlines List', () => {
   it('should exist', () => {
     expect(HeadlineList).toExist();
   });
-  it('should render one or more Headline components for each news source',()=>{
+  it('should render one or more Headline components for each news source',() => {
     const sources = [{
       id: 1,
       name: 'CNN',
@@ -24,7 +24,7 @@ describe('Headlines List', () => {
       url:'#'
     }];
 
-    const headlineList = TestUtils.renderIntoDocument(<HeadlineList sources={sources}/>);
+    const headlineList = TestUtils.renderIntoDocument(<HeadlineList sources={sources} />);
     const headlineComponents = TestUtils.scryRenderedComponentsWithType(headlineList,HeadlineItem);
 
     expect(headlineComponents.length).toBe(sources.length);

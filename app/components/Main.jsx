@@ -6,8 +6,10 @@ var Main = (props) => {
   return (
     <div>
       <Nav/>
-      <h2 className='page-title'>Bad News</h2>
+      <br/>
+      <br/>
       {props.children}
+
     </div>
   );
 }

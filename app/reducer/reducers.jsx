@@ -33,4 +33,4 @@ export const googleSignInReducer = (state = {}, action) => {
     default:
       return state;
   }
-}
+};

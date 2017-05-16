@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchAllArticles} from 'actions';
+import { fetchAllArticles } from 'actions';
 class HeadlineItem extends React.Component{
 
   constructor(props){
@@ -9,17 +9,23 @@ class HeadlineItem extends React.Component{
   }
   handleSubmit(e){
     e.preventDefault();
-    const{dispatch,urlText,onClickURL,id} = this.props;
+    const { Top } = this.refs;
+    const{ dispatch, urlText, onClickURL, id } = this.props;
     //const urlText = this.props.url;
 
     onClickURL(id);
-    dispatch(fetchAllArticles(id.toLowerCase()));
-
-
+    if(Top.checked){
+    dispatch(fetchAllArticles(id.toLowerCase(), Top.checked));
+    Top.checked = false;
+  } else{
+    dispatch(fetchAllArticles(id.toLowerCase(), false));
   }
+}
 //  <a className= 'button' href={url} target='blank' ref='url'>More Info</a>
+
   render(){
-    const { name, description, url,dispatch } = this.props;
+    const { name, description, url, dispatch } = this.props;
+    
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -28,6 +34,10 @@ class HeadlineItem extends React.Component{
 
 
           <button className='button' >Read More</button>
+            <label>
+            <input type='checkbox' ref='Top' onChange={this.handleSubmit.bind(this)} />
+            Latest Headlines
+            </label>
         </form>
       </div>
     )

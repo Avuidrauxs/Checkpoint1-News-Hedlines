@@ -57,11 +57,12 @@ export const fetchNewsFinal = () => {
   };
 };
 
-export const fetchAllArticles = (category) => {
+export const fetchAllArticles = (category, sort = false) => {
   return (dispatch) => {
     const encodedCategory = encodeURIComponent(category);
     const requestUrl = `${NEWS_API_URL_SOURCES}&source=${encodedCategory}`;
-
+    const requestUrlLatest = `${NEWS_API_URL_SOURCES}&source=${encodedCategory}&sortBy=latest`;
+    if(!sort){
     axios.get(requestUrl).then(
       (res) => {
         if (res.data.status === 'ok' && res.data.articles === []) {
@@ -74,6 +75,25 @@ export const fetchAllArticles = (category) => {
         throw new Error('Error no news', err);
       }
     );
+  } else {
+    //alert('You will get latest soon');
+    axios.get(requestUrlLatest).then(
+      (res) => {
+        if (res.data.status === 'ok' && res.data.articles === []) {
+          throw new Error('Error no news');
+        } else {
+          dispatch(fetchArticles(res.data.articles));
+          console.log('I entered here too');
+        }
+      },
+      (err) => {
+        throw new Error('Error no news', err);
+      }
+    );
+  }
+
+
+    ////
   };
 };
 

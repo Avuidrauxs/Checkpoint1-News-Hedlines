@@ -17,28 +17,20 @@ class NewsHome extends React.Component {
     };
     //This fetches all the news sources from newsapi.org
     //this.getAllNews();
+
   }
-  filteredSearch(newsSources, top, searchText) {
+  filteredSearch(newsSources,searchText) {
     let filteredSearch = newsSources;
 
-    //Filter by Show World News
-    // filteredSearch = filteredSearch.filter((source)=>{
-    //     return source.category !== 'technology';
-    // })
-    //Filter by Search text
     filteredSearch = filteredSearch.filter((source) => {
       const text = source.name.toLowerCase();
       return searchText.length === 0 || text.indexOf(searchText) > -1;
     });
-
-    //Sort news
-
     return filteredSearch;
   }
   //this method will handle search of haadlines
-  handleSearch(top, searchText) {
+  handleSearch(searchText) {
     this.setState({
-      top,
       searchText: searchText.toLowerCase()
     });
   }
@@ -51,7 +43,6 @@ class NewsHome extends React.Component {
 
     const filteredSearch = this.filteredSearch(
       newsSources,
-      top,
       searchText
     );
     return (
@@ -59,13 +50,17 @@ class NewsHome extends React.Component {
         <div className="row">
           <div className="column small-right small-11 medium-6 large-5">
             <div className="container">
-              <HeadlineSearch onSearch={this.handleSearch.bind(this)} />
+              <HeadlineSearch onSearch={this.handleSearch.bind(this)} top={top} />
+              <div className="container-hybrid">
               <HeadlineList sources={filteredSearch} />
+              </div>
             </div>
           </div>
-
+          <div className='small-right 5'>
+              <div className="container-hybrid">
           {articles.map((article) => {
             return (
+
               <Articles
                 key={article.id}
                 title={article.title}
@@ -77,6 +72,9 @@ class NewsHome extends React.Component {
               />
             );
           })}
+        </div>
+
+        </div>
 
         </div>
 

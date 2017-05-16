@@ -6,8 +6,8 @@ import $ from 'jQuery';
 
 import HeadlineItem from '../../components/HeadlineItem';
 
-describe('Headline', ()=>{
-  it('should exist', ()=>{
+describe('Headline', () => {
+  it('should exist', () => {
     expect(HeadlineItem).toExist();
   });
 });

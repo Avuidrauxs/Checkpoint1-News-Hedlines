@@ -1,15 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchAllArticles } from 'actions';
 
-export default class HeadlineSearch extends React.Component{
-
+class HeadlineSearch extends React.Component{
   constructor(props){
     super(props)
   }
   handleSearch(){
-    const top = this.refs.Top.checked;
+  //  const top = this.refs.Top.checked;
     const searchText = this.refs.searchText.value;
 
-    this.props.onSearch(top,searchText);
+    this.props.onSearch(searchText);
+    //this.props.dispatch(fetchAllArticles())
+
   }
   render(){
     return(
@@ -18,13 +21,11 @@ export default class HeadlineSearch extends React.Component{
         <input type='text' placeholder='Enter a news source you want' ref='searchText' onChange={this.handleSearch.bind(this)}/>
       </div>
       <div>
-        <label>
-        <input type='checkbox' ref='Top' onChange={this.handleSearch.bind(this)}/>
-        Latest Headlines
-        </label>
+
       </div>
     </div>
     )
   }
 
 }
+export default connect()(HeadlineSearch);

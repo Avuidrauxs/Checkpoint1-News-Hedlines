@@ -9,18 +9,20 @@ class HeadlineList extends React.Component{
 
   }
   handleGoToArticles(url){
-    alert('You are about to go ' + url);
+    //alert('You are about to go ' + url);
   }
 
   render(){
     const {sources,dispatch} = this.props;
-    const renderHeadlines = ()=>{
-      return sources.map((source)=>{
+    const renderHeadlines = () => {
+      return sources.map((source) => {
+        if (source.sortBysAvailable.indexOf('latest') > 0){
         return (
-          <HeadlineItem key={source.id} {...source} onClickURL={this.handleGoToArticles}/>
-        )
+          <HeadlineItem key={source.id} {...source} onClickURL={this.handleGoToArticles} />
+        )}
       });
     }
+
     return (
       <div>
         {renderHeadlines()}
