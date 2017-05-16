@@ -3,7 +3,7 @@ import { searchTextReducer, getAllNewsReducer, fetchArticlesReducer, googleSignI
 
 const thunk = require('redux-thunk').default;
 
-export const configureStore =() => {
+const configureStore = (initialState = {}) => {
   const reducer = combineReducers({
     searchText: searchTextReducer,
     getAllNews: getAllNewsReducer,
@@ -12,6 +12,7 @@ export const configureStore =() => {
   });
 
   const store = createStore(reducer,
+    initialState,
   compose(applyMiddleware(thunk),
     window.devToolsExtension
   ? window.devToolsExtension()
@@ -19,3 +20,5 @@ export const configureStore =() => {
 
   return store;
 };
+
+export default configureStore;

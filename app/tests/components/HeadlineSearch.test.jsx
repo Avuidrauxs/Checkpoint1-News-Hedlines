@@ -37,24 +37,24 @@ describe('Headline Search',()=>{
     headlineSearch.refs.searchText.value = searchText;
     TestUtils.Simulate.change(headlineSearch.refs.searchText);
 
-    expect(spy).toHaveBeenCalledWith(false,'AlJazeera');
+    expect(spy).toHaveBeenCalledWith(false, 'AlJazeera');
   });
-  it('should call Onsearch with the proper checked value',()=>{
+  it('should call Onsearch with the proper checked value', () => {
     const spy = expect.createSpy();
-    const headlineSearch = TestUtils.renderIntoDocument(<HeadlineSearch onSearch={spy}/>);
+    const headlineSearch = TestUtils.renderIntoDocument(<HeadlineSearch onSearch={spy} />);
 
-    headlineSearch.refs.showWorldNews.checked = true;
+
     TestUtils.Simulate.change(headlineSearch.refs.showWorldNews);
 
-    expect(spy).toHaveBeenCalledWith(true,'');
+    expect(spy).toHaveBeenCalledWith('');
   });
-  it('should filter Headlines by search text',()=>{
+  it('should filter Headlines by search text', () => {
     //DO THIS LATER
     // const filteredSearch = NewsHome.filteredSearch(newsSources,true,'ign');
     // expect(filteredSearch.length).toBe(1);
 
   });
-  it('should return all headlines when search feild is empty',()=>{
+  it('should return all headlines when search feild is empty', () => {
 
   });
 });

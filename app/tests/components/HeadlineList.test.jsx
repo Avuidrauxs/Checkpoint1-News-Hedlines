@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 import $ from 'jQuery';
+import { Provider } from 'react-redux';
+import { configureStore } from '../../store/configureStore';
 
-import HeadlineList from '../../components/HeadlineList';
-import HeadlineItem from '../../components/HeadlineItem';
+import ConnectedHeadlineList, { HeadlineList } from '../../components/HeadlineList';
+import ConnectedHeadlineItem, { HeadlineItem } from '../../components/HeadlineItem';
 
 describe('Headlines List', () => {
   it('should exist', () => {
     expect(HeadlineList).toExist();
   });
-  it('should render one or more Headline components for each news source',() => {
+  it('should render one or more Headline components for each news source', () => {
     const sources = [{
       id: 1,
       name: 'CNN',
@@ -23,9 +25,17 @@ describe('Headlines List', () => {
       description: 'No man sky is freaking scam',
       url:'#'
     }];
+    const store = configureStore({
+      sources
+    });
 
-    const headlineList = TestUtils.renderIntoDocument(<HeadlineList sources={sources} />);
-    const headlineComponents = TestUtils.scryRenderedComponentsWithType(headlineList,HeadlineItem);
+    const provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <ConnectedHeadlineList/>
+      </Provider>
+    );
+    const headlineList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedHeadlineList)[0];
+    const headlineComponents = TestUtils.scryRenderedComponentsWithType(headlineList, ConnectedHeadlineItem);
 
     expect(headlineComponents.length).toBe(sources.length);
   })

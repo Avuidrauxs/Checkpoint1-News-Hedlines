@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { fetchAllArticles } from 'actions';
-class HeadlineItem extends React.Component{
+
+export class HeadlineItem extends React.Component{
 
   constructor(props){
     super(props)
@@ -25,7 +26,7 @@ class HeadlineItem extends React.Component{
 
   render(){
     const { name, description, url, dispatch } = this.props;
-    
+
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>

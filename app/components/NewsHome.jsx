@@ -6,7 +6,7 @@ import Articles from "./Articles";
 import { fetchNewsFinal } from "actions";
 import { connect } from "react-redux";
 
-class NewsHome extends React.Component {
+export class NewsHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

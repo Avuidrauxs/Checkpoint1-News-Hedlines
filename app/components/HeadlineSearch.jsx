@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAllArticles } from 'actions';
 
-class HeadlineSearch extends React.Component{
+export class HeadlineSearch extends React.Component{
   constructor(props){
     super(props)
   }

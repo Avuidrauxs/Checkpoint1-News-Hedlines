@@ -7,7 +7,7 @@ import { googleSignIn } from '../action/actions';
 
 
 
-class Login extends React.Component {
+export class Login extends React.Component {
 
   constructor(props) {
     super(props);

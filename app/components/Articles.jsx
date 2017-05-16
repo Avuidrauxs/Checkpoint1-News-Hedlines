@@ -16,7 +16,7 @@ export default class Articles extends React.Component {
       <div className="card news-card">
         <img src={urlToImage} />
         <div className="card-section">
-          <div className="news-card-date"><time datetime = {publishedAt} ></time></div>
+          <div className="news-card-date">{publishedAt.split('T')[0]}</div>
           <article className="news-card-article">
             <h4 className="news-card-title">
               <a href={url}>{title}</a>

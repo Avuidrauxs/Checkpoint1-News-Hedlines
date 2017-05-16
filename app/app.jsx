@@ -6,11 +6,15 @@ import NewsHome from './components/NewsHome';
 import Main from './components/Main';
 import Login from './components/Login';
 import NotFoundPage from './components/NotFoundPage';
+import configureStore from './store/configureStore';
 
-const store = require('./store/configureStore').configureStore();
+
+const store = configureStore();
 
 // Load foundation
 $(document).foundation();
+
+
 store.subscribe(() => {
   //console.log('New state', store.getState());
 })
