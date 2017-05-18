@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link, browserHistory } from 'react-router';
 import GoogleLogin from 'react-google-login';
 import { googleSignIn } from '../action/actions';
-
+import gplus from '../images/gplus.png';
 
 
 export class Login extends React.Component {
@@ -42,31 +42,17 @@ export class Login extends React.Component {
           <div className="row">
             <div className="large-12 columns">
               <form>
-                <div className="row">
-                  <div className="large-12 columns">
-                    <input type="text" name="username" placeholder="Username" />
+                <div className="row centered">
+                  <div>
+                    <p>Welcome to the Bad News App sign in to view news sources</p>
                   </div>
-                </div>
-                <div className="row">
-                  <div className="large-12 columns">
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                    />
-                  </div>
-                </div>
-                <div className="row">
                   <div className="large-12 large-centered columns">
-                    <Link to="/news_home" className="button expand">
-                      {" "}<img src="#" alt="G-login" />{" "}
-                    </Link>
                     <GoogleLogin
                     clientId={googleId}
                     buttonText="Sign In"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
-                    />
+                    ><img src={gplus} alt="G-login" /></GoogleLogin>
                   </div>
                 </div>
               </form>

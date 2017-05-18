@@ -15,9 +15,10 @@ export default class Articles extends React.Component {
     return (
 
       <div className="card news-card">
-        <img src={!urlToImage ? noImage : urlToImage} alt="No Image available" />
+        <div className="news-card-img">
+            <img src={!urlToImage ? noImage : urlToImage} alt="No Image available" />
+        </div>
         <div className="card-section">
-
           <div className="news-card-date">{ publishedAt ? publishedAt.split('T')[0] : '' }</div>
           <article className="news-card-article">
             <h4 className="news-card-title">
