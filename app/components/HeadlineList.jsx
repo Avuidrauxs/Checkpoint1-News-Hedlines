@@ -13,16 +13,27 @@ export class HeadlineList extends React.Component {
   render() {
     const { sources, dispatch } = this.props;
     const renderHeadlines = () => {
-      return sources.map(source => {
+      return sources.map((source) => {
+        if(source.sortBysAvailable.indexOf('latest') > 0)
+        {
           return (
             <HeadlineItem
               key={source.id}
               {...source}
               onClickURL={this.handleGoToArticles}
+              showLatest={false}
             />
           );
-
-      });
+        } else {
+          return (
+         <HeadlineItem
+              key={source.id}
+              {...source}
+              onClickURL={this.handleGoToArticles}
+              showLatest={true}
+            />);
+        }
+    });
     };
 
     return (

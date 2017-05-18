@@ -83,10 +83,11 @@ export const fetchAllArticles = (category, sort = false) => {
           throw new Error('Error no news');
         } else {
           dispatch(fetchArticles(res.data.articles));
-          console.log('I entered here too');
+
         }
       },
       (err) => {
+        alert('No latest news section');
         throw new Error('Error no news', err);
       }
     );

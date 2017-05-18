@@ -13,30 +13,37 @@ export class HeadlineItem extends React.Component{
     const { Top } = this.refs;
     const{ dispatch, urlText, onClickURL, id } = this.props;
     //const urlText = this.props.url;
+    dispatch(fetchAllArticles(id.toLowerCase(), false));
+    if(Top.checked){
+      Top.checked = false;
+    }
 
     onClickURL(id);
+
+}
+
+  handleCheckbox(){
+    const { Top } = this.refs;
+    const{ dispatch, id } = this.props;
     if(Top.checked){
     dispatch(fetchAllArticles(id.toLowerCase(), Top.checked));
-    Top.checked = false;
-  } else{
-    dispatch(fetchAllArticles(id.toLowerCase(), false));
+  }else if(!Top.checked){
+    dispatch(fetchAllArticles(id.toLowerCase(), Top.checked));
   }
-}
-//  <a className= 'button' href={url} target='blank' ref='url'>More Info</a>
+  }
+
 
   render(){
-    const { name, description, url, dispatch } = this.props;
+    const { name, description, url, dispatch,showLatest } = this.props;
 
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <h4>{name}</h4>
           <p>{description}.</p>
-
-
           <button className='button' >Read More</button>
-            <label>
-            <input type='checkbox' ref='Top' onChange={this.handleSubmit.bind(this)} />
+            <label hidden={showLatest}>
+            <input type='checkbox' ref='Top' onChange={this.handleCheckbox.bind(this)} hidden={showLatest}/>
             Latest Headlines
             </label>
         </form>
