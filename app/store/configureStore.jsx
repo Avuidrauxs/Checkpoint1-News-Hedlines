@@ -8,7 +8,7 @@ const configureStore = (initialState = {}) => {
     searchText: searchTextReducer,
     getAllNews: getAllNewsReducer,
     fetchArticles: fetchArticlesReducer,
-    googleSignIn: googleSignInReducer
+    googleSignIn: googleSignInReducer,
   });
 
   const store = createStore(reducer,

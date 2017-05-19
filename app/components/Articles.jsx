@@ -9,14 +9,14 @@ export default class Articles extends React.Component {
       url,
       urlToImage,
       author,
-      publishedAt
+      publishedAt,
     } = this.props;
 
     return (
 
       <div className="card news-card">
         <div className="news-card-img">
-            <img src={!urlToImage ? noImage : urlToImage} alt="No Image available" />
+          <img src={!urlToImage ? noImage : urlToImage} alt="Not  available" />
         </div>
         <div className="card-section">
           <div className="news-card-date">{ publishedAt ? publishedAt.split('T')[0] : '' }</div>

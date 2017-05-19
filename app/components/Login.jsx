@@ -1,9 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Link, browserHistory } from 'react-router';
 import GoogleLogin from 'react-google-login';
-import { googleSignIn } from '../action/actions';
 import gplus from '../images/gplus.png';
 
 
@@ -18,22 +15,20 @@ export class Login extends React.Component {
     this.responseGoogle = this.responseGoogle.bind(this);
   }
 
-    responseGoogle(response) {
-      const userProfile = response.profileObj;
-      if(!response.error) {
-      this.setState({
-        credentials: {
-          email: userProfile.email,
-          name: userProfile.name
+      responseGoogle(response) {
+        const userProfile = response.profileObj;
+        if (!response.error) {
+          this.setState({
+            credentials: {
+              email: userProfile.email,
+              name: userProfile.name
+            }
+          });
+        window.location = '/#/news_home';
+        } else {
+          alert("Google log in error");
         }
-      });
-        googleSignIn(this.state.credentials);
-      window.location = '/#/news_home';
-    } else {
-      alert("Google log in error");
-    }
-    console.log(sessionStorage.getItem(userProfile));
-  }
+      }
   render() {
     const googleId = '333746722874-22bu4jv27tme8rtq73q8nvjq23nu3cqm.apps.googleusercontent.com';
     return (
@@ -48,10 +43,10 @@ export class Login extends React.Component {
                   </div>
                   <div className="large-12 large-centered columns">
                     <GoogleLogin
-                    clientId={googleId}
-                    buttonText="Sign In"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
+                      clientId={googleId}
+                      buttonText="Sign In"
+                      onSuccess={this.responseGoogle}
+                      onFailure={this.responseGoogle}
                     ><img src={gplus} alt="G-login" /></GoogleLogin>
                   </div>
                 </div>
@@ -63,7 +58,5 @@ export class Login extends React.Component {
     );
   }
 }
-
-
 
 export default connect()(Login);

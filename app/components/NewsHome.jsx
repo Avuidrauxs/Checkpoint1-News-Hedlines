@@ -1,10 +1,10 @@
-import React from "react";
-import HeadlineList from "./HeadlineList";
-import NewsAPI from "../api/NewsAPI";
-import HeadlineSearch from "./HeadlineSearch";
-import Articles from "./Articles";
-import { fetchNewsFinal } from "actions";
-import { connect } from "react-redux";
+import React from 'react';
+import HeadlineList from './HeadlineList';
+import NewsAPI from '../api/NewsAPI';
+import HeadlineSearch from './HeadlineSearch';
+import Articles from './Articles';
+import { fetchNewsFinal } from 'actions';
+import { connect } from 'react-redux';
 
 export class NewsHome extends React.Component {
   constructor(props) {
@@ -13,13 +13,12 @@ export class NewsHome extends React.Component {
       newsSources: [],
       top: false,
       searchText: '',
-      articles: []
+      articles: [],
     };
-    //This fetches all the news sources from newsapi.org
-    //this.getAllNews();
-
+    // This fetches all the news sources from newsapi.org
+    // this.getAllNews();
   }
-  filteredSearch(newsSources,searchText) {
+  filteredSearch(newsSources, searchText) {
     let filteredSearch = newsSources;
 
     filteredSearch = filteredSearch.filter((source) => {
@@ -28,22 +27,22 @@ export class NewsHome extends React.Component {
     });
     return filteredSearch;
   }
-  //this method will handle search of haadlines
+  // this method will handle search of haadlines
   handleSearch(searchText) {
     this.setState({
-      searchText: searchText.toLowerCase()
+      searchText: searchText.toLowerCase(),
     });
   }
   render() {
     const { top, searchText } = this.state;
     const { dispatch, newsSources, articles } = this.props;
     dispatch(fetchNewsFinal());
-    //dispatch(fetchAllArticles('ign'));
-    //console.log(articles);
+    // dispatch(fetchAllArticles('ign'));
+    // console.log(articles);
 
     const filteredSearch = this.filteredSearch(
       newsSources,
-      searchText
+      searchText,
     );
     return (
       <div>
@@ -52,29 +51,27 @@ export class NewsHome extends React.Component {
             <div className="container">
               <HeadlineSearch onSearch={this.handleSearch.bind(this)} top={top} />
               <div className="container-hybrid">
-              <HeadlineList sources={filteredSearch} />
+                <HeadlineList sources={filteredSearch} />
               </div>
             </div>
           </div>
-          <div className='small-right 5'>
-              <div className="container-hybrid">
-          {articles.map((article) => {
-            return (
+          <div className="small-right 5">
+            <div className="container-hybrid">
+              {articles.map(article => (
 
-              <Articles
-                key={article.id}
-                title={article.title}
-                description={article.description}
-                url={article.url}
-                publishedAt={article.publishedAt}
-                urlToImage={article.urlToImage}
-                author={article.author}
-              />
-            );
-          })}
-        </div>
+                <Articles
+                  key={article.id}
+                  title={article.title}
+                  description={article.description}
+                  url={article.url}
+                  publishedAt={article.publishedAt}
+                  urlToImage={article.urlToImage}
+                  author={article.author}
+                />
+            ))}
+            </div>
 
-        </div>
+          </div>
 
         </div>
 
@@ -82,10 +79,8 @@ export class NewsHome extends React.Component {
     );
   }
 }
-export default connect((state) => {
-  return {
-    newsSources: state.getAllNews,
-    articles: state.fetchArticles,
-    credentials: state.credentials
-  };
-})(NewsHome);
+export default connect(state => ({
+  newsSources: state.getAllNews,
+  articles: state.fetchArticles,
+  credentials: state.credentials,
+}))(NewsHome);

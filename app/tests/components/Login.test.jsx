@@ -6,8 +6,8 @@ import expect from 'expect';
 
 import Login from '../../components/NewsHome';
 
-describe('Login', ()=>{
-  it('should exist', ()=>{
+describe('Login', () => {
+  it('should exist', () => {
     expect(Login).toExist();
-  })
-})
+  });
+});

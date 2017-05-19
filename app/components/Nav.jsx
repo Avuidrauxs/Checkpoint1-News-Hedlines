@@ -1,17 +1,17 @@
-var React = require('react');
-var {Link, IndexLink} = require('react-router');
+const React = require('react');
+const { Link, IndexLink } = require('react-router');
 
-var Nav = React.createClass({
-  onSearch: function (e) {
-      e.preventDefault();
-      alert('Not yet wired up!');
+const Nav = React.createClass({
+  onSearch(e) {
+    e.preventDefault();
+    alert('Not yet wired up!');
   },
-  render: function () {
+  render() {
     return (
       <div className="top-bar">
         <div className="top-bar-left">
           <ul className="menu">
-            <li className="menu-text">Bad News App</li>
+            <li className="menu-text"><h3>Bad News App</h3></li>
           </ul>
         </div>
         <div className="top-bar-right">
@@ -23,7 +23,7 @@ var Nav = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 module.exports = Nav;
