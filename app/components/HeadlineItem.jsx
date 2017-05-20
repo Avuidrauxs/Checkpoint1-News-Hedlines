@@ -49,7 +49,7 @@ export class HeadlineItem extends React.Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           <h4>{name}</h4>
           <p>{description}.</p>
-          <button className="button" >Read More</button>
+          <button className="button" >View Articles</button>
           <label hidden={showLatest}>
             <input type="checkbox" ref="Top" onChange={this.handleCheckbox} hidden={showLatest} />
             Latest Headlines

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GoogleLogin from 'react-google-login';
 import gplus from '../images/gplus.png';
+import Nav from './Nav';
 
 
 export class Login extends React.Component {
@@ -24,6 +25,8 @@ export class Login extends React.Component {
           name: userProfile.name
         }
       });
+      localStorage.setItem('jwtToken', 'I dey');
+      new Nav().checkToken();
       window.location = '/#/news_home';
         } else {
           alert("Google log in error");
