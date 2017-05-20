@@ -5,6 +5,10 @@ import HeadlineSearch from './HeadlineSearch';
 import Articles from './Articles';
 import { fetchNewsFinal } from 'actions';
 import { connect } from 'react-redux';
+import SourcesStore from '../store/SourcesStore';
+import ArticlesStore from '../store/ArticlesStore';
+import { fetchAllNewsSources, fetchAllArticles } from '../action/fluxActions';
+
 
 export class NewsHome extends React.Component {
   constructor(props) {
@@ -14,10 +18,33 @@ export class NewsHome extends React.Component {
       top: false,
       searchText: '',
       articles: [],
+      altSources: [],
+      altArticles: [],
+      articleTitle: ''
     };
-    // This fetches all the news sources from newsapi.org
-    // this.getAllNews();
+    this.getSources = this.getSources.bind(this);
+    this.getArticles = this.getArticles.bind(this);
   }
+  componentDidMount(){
+    fetchAllNewsSources();
+    SourcesStore.on('change', this.getSources);
+    // ArticlesStore.on('change', this.getArticles);
+  }
+  componentWillUnmount() {
+    SourcesStore.removeListener('change', this.getSources);
+    // ArticlesStore.removeListener('change', this.getArticles);
+  }
+  componentDidUpdate(){
+    ArticlesStore.on('change', this.getArticles);
+  }
+  getSources(){
+    this.setState({
+      altSources: SourcesStore.getAllNewsSources()
+    })
+  }
+
+
+
   filteredSearch(newsSources, searchText) {
     let filteredSearch = newsSources;
 
@@ -27,6 +54,15 @@ export class NewsHome extends React.Component {
     });
     return filteredSearch;
   }
+  getArticles(){
+    this.setState({
+      altArticles: ArticlesStore.getAllNewsArticles()
+    });
+  }
+  handleGetArticles(sourceID, sort){
+    fetchAllArticles(sourceID, sort);
+    ArticlesStore.on('change', this.getArticles);
+  }
   // this method will handle search of haadlines
   handleSearch(searchText) {
     this.setState({
@@ -34,14 +70,9 @@ export class NewsHome extends React.Component {
     });
   }
   render() {
-    const { top, searchText } = this.state;
-    const { dispatch, newsSources, articles } = this.props;
-    dispatch(fetchNewsFinal());
-    // dispatch(fetchAllArticles('ign'));
-    // console.log(articles);
-
+    const { top, searchText, altSources, altArticles } = this.state;
     const filteredSearch = this.filteredSearch(
-      newsSources,
+      altSources,
       searchText,
     );
     return (
@@ -56,8 +87,9 @@ export class NewsHome extends React.Component {
             </div>
           </div>
           <div className="small-right 5">
+            <h3>{this.state.articleTitle}</h3>
             <div className="container-hybrid">
-              {articles.map(article => (
+              {altArticles.map(article => (
 
                 <Articles
                   key={article.id}

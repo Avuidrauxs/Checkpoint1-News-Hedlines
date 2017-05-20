@@ -15,16 +15,16 @@ export class Login extends React.Component {
     this.responseGoogle = this.responseGoogle.bind(this);
   }
 
-      responseGoogle(response) {
-        const userProfile = response.profileObj;
-        if (!response.error) {
-          this.setState({
-            credentials: {
-              email: userProfile.email,
-              name: userProfile.name
-            }
-          });
-        window.location = '/#/news_home';
+  responseGoogle(response) {
+    const userProfile = response.profileObj;
+    if (!response.error) {
+      this.setState({
+        credentials: {
+          email: userProfile.email,
+          name: userProfile.name
+        }
+      });
+      window.location = '/#/news_home';
         } else {
           alert("Google log in error");
         }

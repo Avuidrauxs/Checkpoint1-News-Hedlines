@@ -6,9 +6,7 @@ export class HeadlineList extends React.Component {
   constructor(props) {
     super(props);
   }
-  handleGoToArticles(url) {
-    // alert('You are about to go ' + url);
-  }
+
 
   render() {
     const { sources, dispatch } = this.props;
