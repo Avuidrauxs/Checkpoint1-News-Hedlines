@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var path = require("path");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: [
@@ -14,6 +15,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
+    }),
+    new Dotenv({
+      path: './.env', // Path to .env file (this is the default)
+      safe: false // load .env.example (defaults to "false" which does not use dotenv-safe)
     })
   ],
   output: {

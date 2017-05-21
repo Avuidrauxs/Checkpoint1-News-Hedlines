@@ -1,17 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import HeadlineItem from './HeadlineItem';
-import { connect } from 'react-redux';
 
-export class HeadlineList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  handleGoToArticles(url) {
-    // alert('You are about to go ' + url);
-  }
-
+/**
+ * This component creates the headlines list
+ * @class HeadlineList
+ * @extends {React.Component}
+ * @type {Object}
+ */
+class HeadlineList extends React.Component {
+/**
+ * This renders the hierachy of views for this component
+ * @memberof HeadlineList
+ * @return {React.Component} - returns react component
+ */
   render() {
-    const { sources, dispatch } = this.props;
+    const { sources } = this.props;
     const renderHeadlines = () => sources.map((source) => {
       if (source.sortBysAvailable.indexOf('latest') > 0) {
         return (
@@ -39,9 +43,12 @@ export class HeadlineList extends React.Component {
     );
   }
 }
-export default connect()(HeadlineList);
-//   (state)=>{
-//     return {
-//       sources: state.sources
-//     }
-// })(HeadlineList)
+HeadlineList.propTypes = {
+  sources: PropTypes.array
+};
+
+HeadlineList.defaultProps = {
+  sources: []
+};
+
+export default HeadlineList;
