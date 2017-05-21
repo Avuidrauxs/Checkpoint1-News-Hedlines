@@ -1,6 +1,10 @@
 import axios from 'axios';
 import dispatcher from '../dispatcher';
 
+/**
+ * This function fetches all News Sources
+ * @return {[type]} [description]
+ */
 export function fetchAllNewsSources() {
   const requestUrl = `${process.env.NEWS_API_URL}`;
 
@@ -18,6 +22,12 @@ export function fetchAllNewsSources() {
     );
 }
 
+/**
+ * Fetches all the articles of the news source catergory selected
+ * @param  {string}  category     [it is the catergory of the news source]
+ * @param  {Boolean} [sort=false] [sort variable that checks for latest article headlines]
+ * @return {[type]}               [description]
+ */
 export function fetchAllArticles(category, sort = false) {
   const encodedCategory = encodeURIComponent(category);
   const requestUrl = `${process.env.NEWS_API_URL_SOURCES}&source=${encodedCategory}`;
@@ -36,7 +46,6 @@ export function fetchAllArticles(category, sort = false) {
       },
     );
   } else {
-    // alert('You will get latest soon');
     axios.get(requestUrlLatest).then(
       (res) => {
         if (res.data.status === 'ok' && res.data.articles === []) {
@@ -46,7 +55,6 @@ export function fetchAllArticles(category, sort = false) {
         }
       },
       (err) => {
-        alert('No latest news section');
         throw new Error('Error no news', err);
       },
     );

@@ -1,12 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import GoogleLogin from 'react-google-login';
+// import PropTypes from 'prop-types';
 import gplus from '../images/gplus.png';
-import Nav from './Nav';
-
-
-export class Login extends React.Component {
-
+// import Nav from './Nav';
+/**
+ * This component handles the Signin into the app using Google login
+ * @class Login
+ * @extends {React.Component}
+ */
+class Login extends React.Component {
+/**
+ * Login constructor
+ * @param  {object} props - holds parameters entered from outside component
+ * @return {null}       - returns no value
+ */
   constructor(props) {
     super(props);
     this.state = { credentials: {
@@ -15,7 +22,11 @@ export class Login extends React.Component {
     } };
     this.responseGoogle = this.responseGoogle.bind(this);
   }
-
+/**
+ * This method ha
+ * @param  {[type]} response [description]
+ * @return {[type]}          [description]
+ */
   responseGoogle(response) {
     const userProfile = response.profileObj;
     if (!response.error) {
@@ -25,15 +36,19 @@ export class Login extends React.Component {
           name: userProfile.name
         }
       });
-      localStorage.setItem('jwtToken', 'I dey');
-      new Nav().checkToken();
+      // localStorage.setItem('jwtToken', 'I dey');
+      // new Nav().checkToken();
       window.location = '/#/news_home';
-        } else {
-          alert("Google log in error");
-        }
-      }
+    } else {
+      // alert('Google log in error');
+    }
+  }
+  /**
+   * This method renders the components
+   * @memberof Login
+   * @return {React.Component} - returns a hierachy of views to make up the component
+   */
   render() {
-    const googleId = '333746722874-22bu4jv27tme8rtq73q8nvjq23nu3cqm.apps.googleusercontent.com';
     return (
       <div className="large-3 large-centered columns">
         <div className="login-box">
@@ -46,8 +61,8 @@ export class Login extends React.Component {
                   </div>
                   <div className="large-12 large-centered columns">
                     <GoogleLogin
-                      clientId={googleId}
-                      buttonText="Sign In"
+                      clientId={process.env.GOOGLE_CLIENT_ID}
+                      buttonText=""
                       onSuccess={this.responseGoogle}
                       onFailure={this.responseGoogle}
                     ><img src={gplus} alt="G-login" /></GoogleLogin>
@@ -62,4 +77,4 @@ export class Login extends React.Component {
   }
 }
 
-export default connect()(Login);
+export default Login;

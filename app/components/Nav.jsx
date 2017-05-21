@@ -1,35 +1,55 @@
 const React = require('react');
-const { Link, IndexLink } = require('react-router');
+const { Link } = require('react-router');
 
-export default class Nav extends React.Component{
-
-  constructor(props){
+/**
+ * This class renders the Navigation component for Bad News App
+ * @class Nav
+ * @extends {React.Component}
+ * @type {Object}
+ */
+class Nav extends React.Component {
+/**
+ * Nav constructor
+ * @param  {object} props - holds parameters passed from other components
+ * @return {null}       - returns no value
+ */
+  constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       token: false
-    }
+    };
+    this.logOut = this.logOut.bind(this);
   }
-
-  checkToken(){
+/**
+ * This method checks whether JSON WEb Token exists for the current user
+ * @memberof Nav
+ * @return {null} - returns no value
+ */
+  checkToken() {
     const tempToken = localStorage.getItem('jwtToken');
-    if(tempToken){
+    if (tempToken) {
       this.setState({
         token: false
-      })
+      });
     } else {
       this.setState({
         token: true
-      })
+      });
     }
   }
+  /**
+   * This method logs the user out and clears my token
+   * @memberof Nav
+   * @return {null} - returns no value
+   */
   logOut() {
-    localStorage.clear();
-    console.log('cleared');
+    // Code goes here
   }
-  onSearch(e) {
-    e.preventDefault();
-    alert('Not yet wired up!');
-  }
+  /**
+   * This method renders the Navigation component
+   * @memberof Nav
+   * @return {React.Component} - returns a hierachy of views to form the component
+   */
   render() {
     return (
       <div className="top-bar">
@@ -39,9 +59,9 @@ export default class Nav extends React.Component{
           </ul>
         </div>
         <div className="top-bar-right">
-          <form>
+          <form onSubmit={this.logOut}>
             <ul className="menu" hidden={this.state.token}>
-              <Link to="/" className="button" onClick={this.logOut()}>LOG OUT</Link>
+              <Link to="/" className="button">LOG OUT</Link>
             </ul>
           </form>
         </div>
@@ -49,3 +69,5 @@ export default class Nav extends React.Component{
     );
   }
 }
+
+export default Nav;

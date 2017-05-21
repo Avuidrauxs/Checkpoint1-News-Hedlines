@@ -11,7 +11,7 @@ module.exports = function (config) {
       'app/tests/**/*.test.jsx'
     ],
     preprocessors: {
-      'app/tests/**/*.test.jsx': ['webpack', 'sourcemap','progress', 'coverage']
+      'app/tests/**/*.test.jsx': ['webpack', 'sourcemap', 'coverage']
     },
     reporters: ['mocha', 'coverage'],
     client: {

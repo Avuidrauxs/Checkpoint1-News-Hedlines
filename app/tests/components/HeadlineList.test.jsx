@@ -2,11 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
-import { Provider } from 'react-redux';
-import { configureStore } from '../../store/configureStore';
 
-import ConnectedHeadlineList, { HeadlineList } from '../../components/HeadlineList';
-import ConnectedHeadlineItem, { HeadlineItem } from '../../components/HeadlineItem';
+
+import HeadlineList from '../../components/HeadlineList';
+import HeadlineItem from '../../components/HeadlineItem';
 
 describe('Headlines List', () => {
   it('should exist', () => {
