@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Nav from './Nav';
 
 
@@ -12,4 +13,11 @@ const Main = props => (
   </div>
   );
 
-module.exports = Main;
+Main.propTypes = {
+  children: PropTypes.func
+};
+Main.defaultProps = {
+  children: {}
+};
+
+export default Main;

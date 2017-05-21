@@ -1,7 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import noImage from '../images/no-image-placeholder.png';
 
+/**
+ * This component renders Articles
+ * @class Articles
+ * @extends {React.Component}
+ * @type {String}
+ */
 export default class Articles extends React.Component {
+/**
+ * This function renders the hierachy of views for Article component
+ * @return {React.Component} returns a react component
+ */
   render() {
     const {
       title,
@@ -22,7 +33,7 @@ export default class Articles extends React.Component {
           <div className="news-card-date">{ publishedAt ? publishedAt.split('T')[0] : '' }</div>
           <article className="news-card-article">
             <h4 className="news-card-title">
-              <a href={url} target="_blank">{title}</a>
+              <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
             </h4>
             <p className="news-card-description">
               {description}
@@ -39,3 +50,21 @@ export default class Articles extends React.Component {
     );
   }
 }
+
+Articles.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  url: PropTypes.string,
+  urlToImage: PropTypes.string,
+  author: PropTypes.string,
+  publishedAt: PropTypes.string
+};
+
+Articles.defaultProps = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  url: PropTypes.string,
+  urlToImage: PropTypes.string,
+  author: PropTypes.string,
+  publishedAt: PropTypes.string
+};
