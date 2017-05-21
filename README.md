@@ -2,7 +2,6 @@
 [![Code Climate](https://codeclimate.com/github/andela-aanchirinah/Checkpoint1-News-Hedlines/badges/gpa.svg)](https://codeclimate.com/github/andela-aanchirinah/Checkpoint1-News-Hedlines)
 [![Coverage Status](https://coveralls.io/repos/github/andela-aanchirinah/Checkpoint1-News-Hedlines/badge.svg?branch=master)](https://coveralls.io/github/andela-aanchirinah/Checkpoint1-News-Hedlines?branch=master)
 
-
 # Bad News App
 
 A news app that fetches news feed from http://newsapi.org RESTFUL API. You can try the the live demo at https://bad-news-app.herokuapp.com
