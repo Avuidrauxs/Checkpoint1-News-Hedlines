@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 // App css
 import 'style!css!sass!applicationStyles';
 import { Route, Router, IndexRoute, hashHistory } from 'react-router';
-import NewsHome from './components/NewsHome';
+import { NewsHome } from './components/NewsHome';
 import Main from './components/Main';
 import Login from './components/Login';
 import NotFoundPage from './components/NotFoundPage';

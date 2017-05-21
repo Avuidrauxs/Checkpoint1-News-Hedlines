@@ -7,6 +7,7 @@ import gplus from '../images/gplus.png';
  * This component handles the Signin into the app using Google login
  * @class Login
  * @extends {React.Component}
+ * @type {Object}
  */
 class Login extends React.Component {
 /**
@@ -62,7 +63,7 @@ class Login extends React.Component {
                   <div className="large-12 large-centered columns">
                     <GoogleLogin
                       clientId={process.env.GOOGLE_CLIENT_ID}
-                      buttonText=""
+                      buttonText="Sign In"
                       onSuccess={this.responseGoogle}
                       onFailure={this.responseGoogle}
                     ><img src={gplus} alt="G-login" /></GoogleLogin>
