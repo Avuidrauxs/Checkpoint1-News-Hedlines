@@ -20,7 +20,7 @@ class SourcesStore extends EventEmitter {
   /**
    * this method just sets ths sources store with sources
    * @memberof SourcesStore
-   * @return {null} - returns no value
+   * @return {array} - returns an array of news sources
    */
   getAllNewsSources() {
     return this.sources;
