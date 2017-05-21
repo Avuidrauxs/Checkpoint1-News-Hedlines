@@ -38,7 +38,13 @@ export function fetchAllArticles(category, sort = false) {
         if (res.data.status === 'ok' && res.data.articles === []) {
           throw new Error('Error no news');
         } else {
-          dispatcher.dispatch({ type: 'FETCH_ALL_ARTICLES', articles: res.data.articles });
+          dispatcher.dispatch({
+            type: 'FETCH_ALL_ARTICLES',
+            articles: {
+              articleList: res.data.articles,
+              articleSource: res.data.source
+            }
+          });
         }
       },
       (err) => {

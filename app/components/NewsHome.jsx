@@ -27,7 +27,7 @@ export class NewsHome extends React.Component {
       articles: [],
       altSources: [],
       altArticles: [],
-      articleTitle: ''
+      articleTitle: 'Select a news source to view articles'
     };
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
@@ -81,7 +81,8 @@ export class NewsHome extends React.Component {
  */
   getArticles() {
     this.setState({
-      altArticles: ArticlesStore.getAllNewsArticles()
+      altArticles: ArticlesStore.getAllNewsArticles().articles,
+      articleTitle: ArticlesStore.getAllNewsArticles().articleSource
     });
   }
   /**
@@ -129,7 +130,7 @@ export class NewsHome extends React.Component {
    * @return {React.Component} - returns he hierachy of views required for this component
    */
   render() {
-    const { top, searchText, altSources, altArticles } = this.state;
+    const { top, searchText, altSources, altArticles, articleTitle } = this.state;
     const filteredSearch = this.filteredSearch(
       altSources,
       searchText,
@@ -146,7 +147,7 @@ export class NewsHome extends React.Component {
             </div>
           </div>
           <div className="small-right 5">
-            <h3>{this.state.articleTitle}</h3>
+            <h5 className="page-title">{articleTitle.toUpperCase()}</h5>
             <div className="container-hybrid">
               {altArticles.map(article => (
 
