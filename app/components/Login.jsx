@@ -60,14 +60,12 @@ class Login extends React.Component {
                   <div>
                     <p>Welcome to the Bad News App sign in to view news sources</p>
                   </div>
-                  <div className="large-12 large-centered columns">
                     <GoogleLogin
                       clientId={process.env.GOOGLE_CLIENT_ID}
                       buttonText="Sign In"
                       onSuccess={this.responseGoogle}
                       onFailure={this.responseGoogle}
                     ><img src={gplus} alt="G-login" /></GoogleLogin>
-                  </div>
                 </div>
               </form>
             </div>

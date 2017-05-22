@@ -17,7 +17,7 @@ Main.propTypes = {
   children: PropTypes.func
 };
 Main.defaultProps = {
-  children: {}
+  children: () => {}
 };
 
 export default Main;
