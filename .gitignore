@@ -42,3 +42,7 @@ public/bundle.js
 #Miscellaneous
 .DS_Store
 .env
+
+#lcov-report
+lcov-report
+lcov.info
