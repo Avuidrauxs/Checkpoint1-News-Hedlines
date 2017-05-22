@@ -41,3 +41,4 @@ public/bundle.js
 
 #Miscellaneous
 .DS_Store
+.env
