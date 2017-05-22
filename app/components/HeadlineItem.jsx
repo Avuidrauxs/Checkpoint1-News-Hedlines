@@ -15,7 +15,7 @@ class HeadlineItem extends React.Component {
  */
   constructor(props) {
     super(props);
-
+    this.state = { isChecked: false };
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -27,11 +27,10 @@ class HeadlineItem extends React.Component {
  */
   handleSubmit(e) {
     e.preventDefault();
-    const { Top } = this.refs;
     const { id } = this.props;
     new NewsHome().handleGetArticles(id.toLowerCase(), false);
-    if (Top.checked) {
-      Top.checked = false;
+    if (this.state.isChecked) {
+      this.setState({ isChecked: !this.state.isChecked });
     }
   }
 /**
@@ -40,12 +39,13 @@ class HeadlineItem extends React.Component {
  * @return {null} - no return value
  */
   handleCheckbox() {
-    const { Top } = this.refs;
     const { id } = this.props;
-    if (Top.checked) {
-      new NewsHome().handleGetArticles(id.toLowerCase(), Top.checked);
-    } else if (!Top.checked) {
-      new NewsHome().handleGetArticles(id.toLowerCase(), Top.checked);
+    if (!this.state.isChecked) {
+      new NewsHome().handleGetArticles(id.toLowerCase(), true);
+      this.setState({ isChecked: true });
+    } else {
+      new NewsHome().handleGetArticles(id.toLowerCase(), false);
+      this.setState({ isChecked: false });
     }
   }
 
@@ -63,7 +63,12 @@ class HeadlineItem extends React.Component {
           <p>{description}.</p>
           <button className="button" >View Articles</button>
           <label htmlFor={htmlFor} hidden={showLatest}>
-            <input type="checkbox" ref="Top" onChange={this.handleCheckbox} hidden={showLatest} />
+            <input
+              type="checkbox"
+              checked={this.state.isChecked}
+              onChange={this.handleCheckbox}
+              hidden={showLatest}
+            />
             Latest Headlines
           </label>
         </form>

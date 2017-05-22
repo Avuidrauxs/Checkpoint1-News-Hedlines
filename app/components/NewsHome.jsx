@@ -21,10 +21,7 @@ export class NewsHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newsSources: [],
-      top: false,
       searchText: '',
-      articles: [],
       altSources: [],
       altArticles: [],
       articleTitle: 'Select a news source to view articles'

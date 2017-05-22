@@ -9,5 +9,9 @@ import Nav from '../../components/Nav';
 describe('Nav', () => {
   it('should exist', () => {
     expect(Nav).toExist();
-  })
-})
+  });
+  it('renders without crashing', () => {
+       const div = document.createElement('div');
+       ReactDOM.render(<Nav/>, div);
+   });
+});
