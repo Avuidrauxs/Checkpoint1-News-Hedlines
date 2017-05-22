@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "start": "wepback -p && node server.js"
+    "start": "node server.js"
   },
   "author": "Audax Anchirianh",
   "license": "MIT",
@@ -26,8 +26,7 @@
     "react-dom": "^0.14.7",
     "react-google-login": "^2.8.9",
     "react-redux": "^4.4.1",
-    "react-router": "^2.0.0",
-    "webpack": "^1.12.13"
+    "react-router": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
