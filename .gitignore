@@ -37,7 +37,7 @@ jspm_packages
 .node_repl_history
 
 #Webpack Bundled file
-public/bundle.js
+
 
 #Miscellaneous
 .DS_Store

@@ -22,7 +22,6 @@ class HeadlineList extends React.Component {
           <HeadlineItem
             key={source.id}
             {...source}
-            onClickURL={this.handleGoToArticles}
             showLatest={false}
           />
         );
@@ -31,7 +30,6 @@ class HeadlineList extends React.Component {
         <HeadlineItem
           key={source.id}
           {...source}
-          onClickURL={this.handleGoToArticles}
           showLatest
         />);
     });
