@@ -54,13 +54,13 @@ class Nav extends React.Component {
     return (
       <div className="top-bar">
         <div className="top-bar-left">
-          <ul className="menu">
-            <li className="menu-text"><h3>Bad News App</h3></li>
+          <ul className="menu menu-left">
+            <li className=""><h4>Bad News App</h4></li>
           </ul>
         </div>
         <div className="top-bar-right">
           <form onSubmit={this.logOut}>
-            <ul className="menu" hidden={this.state.token}>
+            <ul className="menu menu-right" hidden={this.state.token}>
               <Link to="/" className="button">LOG OUT</Link>
             </ul>
           </form>

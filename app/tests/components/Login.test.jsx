@@ -10,4 +10,8 @@ describe('Login', () => {
   it('should exist', () => {
     expect(Login).toExist();
   });
+  it('renders without crashing', () => {
+       const div = document.createElement('div');
+       ReactDOM.render(<Login/>, div);
+   });
 });

@@ -15,16 +15,20 @@ class HeadlineSearch extends React.Component {
    */
   constructor(props) {
     super(props);
+    this.state = { searchText: '' };
     this.handleSearch = this.handleSearch.bind(this);
   }
 /**
  * This method handles filtering through the news headlines sources
+ * @param {string} event - event parameter
  * @memberof HeadlineSearch
  * @return {null} - no return value
  */
-  handleSearch() {
-    const searchText = this.refs.searchText.value;
-    this.props.onSearch(searchText);
+  handleSearch(event) {
+    this.setState({
+      searchText: event.target.value
+    });
+    this.props.onSearch(event.target.value);
   }
 /**
  * This method renders the component
@@ -37,7 +41,7 @@ class HeadlineSearch extends React.Component {
         <div>
           <input
             type="text" placeholder="Enter a news source you want"
-            ref="searchText" onChange={this.handleSearch}
+            value={this.state.searchText} onChange={this.handleSearch}
           />
         </div>
         <div />

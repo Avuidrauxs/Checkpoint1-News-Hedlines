@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noImage from '../images/no-image-placeholder.png';
+
 
 /**
  * This component renders Articles
@@ -27,7 +27,7 @@ export default class Articles extends React.Component {
 
       <div className="card news-card">
         <div className="news-card-img">
-          <img src={!urlToImage ? noImage : urlToImage} alt="Not  available" />
+          <img src={urlToImage} alt="Not  available" />
         </div>
         <div className="card-section">
           <div className="news-card-date">{ publishedAt ? publishedAt.split('T')[0] : '' }</div>

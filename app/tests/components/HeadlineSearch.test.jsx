@@ -29,6 +29,10 @@ describe('Headline Search', () => {
   it('should exist', () => {
     expect(HeadlineSearch).toExist();
   });
+  it('renders without crashing', () => {
+       const div = document.createElement('div');
+       ReactDOM.render(<HeadlineSearch/>, div);
+   });
   // it('should call onSearch with entered input text',()=>{
   //   const searchText = 'AlJazeera';
   //   const spy = expect.createSpy();

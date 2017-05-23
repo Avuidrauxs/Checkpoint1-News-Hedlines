@@ -15,19 +15,16 @@ import { fetchAllNewsSources, fetchAllArticles } from '../action/fluxActions';
 export class NewsHome extends React.Component {
   /**
    * This is the NewsHome constructor
-   * @param  {object} props - holds parameters entered from outside component
+   * @param  {object} props - holds parameters entered from outside component.
    * @return {null} - returns no value
    */
   constructor(props) {
     super(props);
     this.state = {
-      newsSources: [],
-      top: false,
       searchText: '',
-      articles: [],
       altSources: [],
       altArticles: [],
-      articleTitle: ''
+      articleTitle: 'Select a news source to view articles'
     };
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
@@ -81,7 +78,8 @@ export class NewsHome extends React.Component {
  */
   getArticles() {
     this.setState({
-      altArticles: ArticlesStore.getAllNewsArticles()
+      altArticles: ArticlesStore.getAllNewsArticles().articles,
+      articleTitle: ArticlesStore.getAllNewsArticles().articleSource
     });
   }
   /**
@@ -129,10 +127,10 @@ export class NewsHome extends React.Component {
    * @return {React.Component} - returns he hierachy of views required for this component
    */
   render() {
-    const { top, searchText, altSources, altArticles } = this.state;
+    const { top, searchText, altSources, altArticles, articleTitle } = this.state;
     const filteredSearch = this.filteredSearch(
       altSources,
-      searchText,
+      searchText
     );
     return (
       <div>
@@ -146,7 +144,7 @@ export class NewsHome extends React.Component {
             </div>
           </div>
           <div className="small-right 5">
-            <h3>{this.state.articleTitle}</h3>
+            <h5 className="page-title">{articleTitle.toUpperCase()}</h5>
             <div className="container-hybrid">
               {altArticles.map(article => (
 

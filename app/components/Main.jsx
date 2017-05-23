@@ -14,10 +14,11 @@ const Main = props => (
   );
 
 Main.propTypes = {
-  children: PropTypes.func
+  children: PropTypes.oneOfType([
+    React.PropTypes.arrayOf(React.PropTypes.node),
+    React.PropTypes.node
+  ]).isRequired
 };
-Main.defaultProps = {
-  children: {}
-};
+
 
 export default Main;
