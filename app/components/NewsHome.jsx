@@ -15,7 +15,7 @@ import { fetchAllNewsSources, fetchAllArticles } from '../action/fluxActions';
 export class NewsHome extends React.Component {
   /**
    * This is the NewsHome constructor
-   * @param  {object} props - holds parameters entered from outside component
+   * @param  {object} props - holds parameters entered from outside component.
    * @return {null} - returns no value
    */
   constructor(props) {

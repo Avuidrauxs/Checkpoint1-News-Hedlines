@@ -51,6 +51,10 @@ module.exports = {
         query: {
           name: "static/media/[name].[ext]"
         }
+      },
+      {
+          test: /\.scss$/,
+          loaders: [ 'style', 'css?sourceMap', 'sass?sourceMap' ]
       }
     ]
   },
