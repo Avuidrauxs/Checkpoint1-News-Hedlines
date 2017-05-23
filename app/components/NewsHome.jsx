@@ -130,7 +130,7 @@ export class NewsHome extends React.Component {
     const { top, searchText, altSources, altArticles, articleTitle } = this.state;
     const filteredSearch = this.filteredSearch(
       altSources,
-      searchText,
+      searchText
     );
     return (
       <div>
