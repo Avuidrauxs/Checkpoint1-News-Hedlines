@@ -5,7 +5,7 @@ import dispatcher from '../dispatcher';
  * This function fetches all News Sources
  * @return {[type]} [description]
  */
-export function fetchAllNewsSources() {
+export const fetchAllNewsSources = () => {
   const requestUrl = `${process.env.NEWS_API_URL}`;
 
   axios.get(requestUrl).then(
@@ -18,22 +18,24 @@ export function fetchAllNewsSources() {
       },
       (err) => {
         throw new Error('Error no news', err);
-      },
+      }
     );
-}
+};
 
 /**
  * Fetches all the articles of the news source catergory selected
- * @param  {string}  category     [it is the catergory of the news source]
+ * @param  {string}  newsSourcesID     [it is the catergory of the news source]
  * @param  {Boolean} [sort=false] [sort variable that checks for latest article headlines]
  * @return {[type]}               [description]
  */
-export function fetchAllArticles(category, sort = false) {
-  const encodedCategory = encodeURIComponent(category);
-  const requestUrl = `${process.env.NEWS_API_URL_SOURCES}&source=${encodedCategory}`;
-  const requestUrlLatest = `${process.env.NEWS_API_URL_SOURCES}&source=${encodedCategory}&sortBy=latest`;
+export const fetchAllArticles = (newsSourcesID, sort = false) => {
+  const encodednewsSourcesID = encodeURIComponent(newsSourcesID);
   if (!sort) {
-    axios.get(requestUrl).then(
+    axios
+    .get(`${process
+      .env
+      .NEWS_API_URL_SOURCES}&source=${encodednewsSourcesID}`)
+    .then(
       (res) => {
         if (res.data.status === 'ok' && res.data.articles === []) {
           throw new Error('Error no news');
@@ -49,10 +51,14 @@ export function fetchAllArticles(category, sort = false) {
       },
       (err) => {
         throw new Error('Error no news', err);
-      },
+      }
     );
   } else {
-    axios.get(requestUrlLatest).then(
+    axios
+    .get(`${process
+      .env
+      .NEWS_API_URL_SOURCES}&source=${encodednewsSourcesID}&sortBy=latest`)
+      .then(
       (res) => {
         if (res.data.status === 'ok' && res.data.articles === []) {
           throw new Error('Error no news');
@@ -68,7 +74,7 @@ export function fetchAllArticles(category, sort = false) {
       },
       (err) => {
         throw new Error('Error no news', err);
-      },
+      }
     );
   }
-}
+};
