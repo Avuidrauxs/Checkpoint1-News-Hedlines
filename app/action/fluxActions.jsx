@@ -28,13 +28,12 @@ export const fetchAllNewsSources = () => {
  * @param  {Boolean} [sort=false] [sort variable that checks for latest article headlines]
  * @return {[type]}               [description]
  */
-export const fetchAllArticles = (newsSourcesID, sort = false) => {
+export const fetchAllArticles = (newsSourcesID, sort = 'top') => {
   const encodednewsSourcesID = encodeURIComponent(newsSourcesID);
-  if (!sort) {
-    axios
+  axios
     .get(`${process
       .env
-      .NEWS_API_URL_SOURCES}&source=${encodednewsSourcesID}`)
+      .NEWS_API_URL_SOURCES}&source=${encodednewsSourcesID}&sortBy=${sort}`)
     .then(
       (res) => {
         if (res.data.status === 'ok' && res.data.articles === []) {
@@ -53,28 +52,28 @@ export const fetchAllArticles = (newsSourcesID, sort = false) => {
         throw new Error('Error no news', err);
       }
     );
-  } else {
-    axios
-    .get(`${process
-      .env
-      .NEWS_API_URL_SOURCES}&source=${encodednewsSourcesID}&sortBy=latest`)
-      .then(
-      (res) => {
-        if (res.data.status === 'ok' && res.data.articles === []) {
-          throw new Error('Error no news');
-        } else {
-          dispatcher.dispatch({
-            type: 'FETCH_ALL_ARTICLES',
-            articles: {
-              articleList: res.data.articles,
-              articleSource: res.data.source
-            }
-          });
-        }
-      },
-      (err) => {
-        throw new Error('Error no news', err);
-      }
-    );
-  }
+  // } else {
+  //   axios
+  //   .get(`${process
+  //     .env
+  //     .NEWS_API_URL_SOURCES}&source=${encodednewsSourcesID}&sortBy=latest`)
+  //     .then(
+  //     (res) => {
+  //       if (res.data.status === 'ok' && res.data.articles === []) {
+  //         throw new Error('Error no news');
+  //       } else {
+  //         dispatcher.dispatch({
+  //           type: 'FETCH_ALL_ARTICLES',
+  //           articles: {
+  //             articleList: res.data.articles,
+  //             articleSource: res.data.source
+  //           }
+  //         });
+  //       }
+  //     },
+  //     (err) => {
+  //       throw new Error('Error no news', err);
+  //     }
+  //   );
+  // }
 };

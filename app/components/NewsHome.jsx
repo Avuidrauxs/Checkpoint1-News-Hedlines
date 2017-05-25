@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import HeadlineList from './HeadlineList';
 import HeadlineSearch from './HeadlineSearch';
 import Articles from './Articles';
@@ -12,7 +12,7 @@ import { fetchAllNewsSources, fetchAllArticles } from '../action/fluxActions';
  * @type {Object}
  * @extends {React.Component}
  */
-export class NewsHome extends React.Component {
+export class NewsHome extends Component {
   /**
    * This is the NewsHome constructor
    * @param  {object} props - holds parameters entered from outside component.
@@ -41,14 +41,6 @@ export class NewsHome extends React.Component {
   componentDidMount() {
     fetchAllNewsSources();
     SourcesStore.on('change', this.getSources);
-  }
-  /**
-   * This method updates the the components that handles the rendering of articles
-   * and populates articles when action is dispatched
-   * @memberof NewsHome
-   *@return {null} - returns no value
-   */
-  componentDidUpdate() {
     ArticlesStore.on('change', this.getArticles);
   }
   /**
@@ -60,6 +52,7 @@ export class NewsHome extends React.Component {
    */
   componentWillUnmount() {
     SourcesStore.removeListener('change', this.getSources);
+    ArticlesStore.removeListener('change', this.getArticles);
   }
   /**
    * This method fetches all the news sources from the store and sets the sources state
@@ -149,7 +142,7 @@ export class NewsHome extends React.Component {
               {altArticles.map(article => (
 
                 <Articles
-                  key={article.id}
+                  key={article.title}
                   title={article.title}
                   description={article.description}
                   url={article.url}
