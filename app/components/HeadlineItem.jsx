@@ -28,9 +28,7 @@ class HeadlineItem extends React.Component {
   handleViewArticlesBtn(e) {
     e.preventDefault();
     const { id, sortBysAvailable } = this.props;
-    //this.state.newsHome.handleGetArticles(id.toLowerCase(), sortBysAvailable[0]);
-    //
-    console.log('i dey inside');
+    this.state.newsHome.handleGetArticles(id.toLowerCase(), sortBysAvailable[0]);
     if (this.state.isChecked) {
       this.setState({ isChecked: !this.state.isChecked });
     }

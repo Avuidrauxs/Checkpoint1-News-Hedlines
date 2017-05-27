@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {
+  ShareButtons,
+  generateShareIcon
+} from 'react-share';
 
 /**
  * This component renders Articles
@@ -22,7 +25,16 @@ export default class Articles extends React.Component {
       author,
       publishedAt,
     } = this.props;
-
+    const {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton
+} = ShareButtons;
+    const FacebookIcon = generateShareIcon('facebook');
+    const TwitterIcon = generateShareIcon('twitter');
+    const GooglePlusIcon = generateShareIcon('google');
+    const LinkedinIcon = generateShareIcon('linkedin');
     return (
 
       <div className="card news-card">
@@ -43,6 +55,21 @@ export default class Articles extends React.Component {
 
             <div className="news-card-author-name">
               By {!author ? 'Anonnymous' : author }
+              <div className="inline-radio">
+
+                <FacebookShareButton url={url}>
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+                <TwitterShareButton url={url}>
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+                <LinkedinShareButton url={url}>
+                  <LinkedinIcon size={32} round />
+                </LinkedinShareButton>
+                <GooglePlusShareButton url={url}>
+                  <GooglePlusIcon size={32} round />
+                </GooglePlusShareButton>
+              </div>
             </div>
           </div>
         </div>
