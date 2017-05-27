@@ -16,10 +16,12 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: false
+      token: true
     };
     this.logOut = this.logOut.bind(this);
+    this.checkToken = this.checkToken.bind(this);
   }
+
 /**
  * This method checks whether JSON WEb Token exists for the current user
  * @memberof Nav
@@ -27,23 +29,23 @@ class Nav extends React.Component {
  */
   checkToken() {
     const tempToken = localStorage.getItem('jwtToken');
-    if (tempToken) {
+    console.log(tempToken, 'token');
+    if (tempToken === 'pap') {
       this.setState({
         token: false
-      });
-    } else {
-      this.setState({
-        token: true
       });
     }
   }
   /**
    * This method logs the user out and clears my token
    * @memberof Nav
+   * @param {object} e - event parameter
    * @return {null} - returns no value
    */
-  logOut() {
-    // Code goes here
+  logOut(e) {
+    e.preventDefault();
+    localStorage.clear();
+    window.location = '/';
   }
   /**
    * This method renders the Navigation component
@@ -61,7 +63,7 @@ class Nav extends React.Component {
         <div className="top-bar-right">
           <form onSubmit={this.logOut}>
             <ul className="menu menu-right" hidden={this.state.token}>
-              <Link to="/" className="button">LOG OUT</Link>
+              <button className="button">LOG OUT</button>
             </ul>
           </form>
         </div>

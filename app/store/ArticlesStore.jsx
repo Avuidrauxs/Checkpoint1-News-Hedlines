@@ -15,7 +15,7 @@ class ArticlesStore extends EventEmitter {
   constructor() {
     super();
     this.articles = [];
-    this.articleTitle = '';
+    this.articleSource = '';
     this.getAllNewsArticles = this.getAllNewsArticles.bind(this);
   }
 
@@ -25,7 +25,7 @@ class ArticlesStore extends EventEmitter {
  * @return {array} - returns an array of articles
  */
   getAllNewsArticles() {
-    return { articles: this.articles, articleSource: this.articleTitle };
+    return { articles: this.articles, articleSource: this.articleSource };
   }
   /**
    * This function listens for payLoad from the action and stores them
@@ -38,7 +38,7 @@ class ArticlesStore extends EventEmitter {
     switch (action.type) {
       case 'FETCH_ALL_ARTICLES':
         this.articles = action.articles.articleList;
-        this.articleTitle = action.articles.articleSource;
+        this.articleSource = action.articles.articleSource;
         this.emit('change');
         break;
       default:
