@@ -4,6 +4,8 @@ import {
   ShareButtons,
   generateShareIcon
 } from 'react-share';
+import '../styles/favourite-button';
+import { snackToast } from '../styles/snack-bar';
 
 /**
  * This component renders Articles
@@ -12,6 +14,7 @@ import {
  * @type {String}
  */
 export default class Articles extends React.Component {
+
 /**
  * This function renders the hierachy of views for Article component
  * @return {React.Component} returns a react component
@@ -23,8 +26,22 @@ export default class Articles extends React.Component {
       url,
       urlToImage,
       author,
-      publishedAt,
     } = this.props;
+    let favArticlesArray = [];
+    const saveFavourites = () => {
+      snackToast();
+      const favArticles = {
+        ...this.props
+      };
+      if (localStorage.getItem('favourites')) {
+        favArticlesArray = JSON.parse(localStorage.getItem('favourites'));
+        favArticlesArray.push(favArticles);
+        localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
+      } else {
+        favArticlesArray.push(favArticles);
+        localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
+      }
+    };
     const {
   FacebookShareButton,
   GooglePlusShareButton,
@@ -37,43 +54,67 @@ export default class Articles extends React.Component {
     const LinkedinIcon = generateShareIcon('linkedin');
     return (
 
-      <div className="card news-card">
-        <div className="news-card-img">
-          <img src={urlToImage} alt="Not  available" />
-        </div>
-        <div className="card-section">
-          <div className="news-card-date">{ publishedAt ? publishedAt.split('T')[0] : '' }</div>
-          <article className="news-card-article">
-            <h4 className="news-card-title">
-              <a href={url} target="_blank" rel="noopener noreferrer">{title}</a>
+      <div className="wide-article-link">
+        <div className="row">
+          <div className="small-12 medium-9 columns">
+            <h4 className="article-title">
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                {title}
+              </a>
             </h4>
-            <p className="news-card-description">
-              {description}
+            <p
+              className="article-author"
+            >
+              <em>by
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  {!author ? ' Anonnymous' : author }
+                </a>
+              </em>
             </p>
-          </article>
-          <div className="news-card-author">
+            <p
+              className="article-elipsis"
+            >{description}
+              <a
+                href={url}
+                target="_blank" rel="noopener noreferrer" className="read-more"
+              >Read more
+              </a></p>
+            <div className="article-social">
 
-            <div className="news-card-author-name">
-              By {!author ? 'Anonnymous' : author }
-              <div className="inline-radio">
-
+              <a className="button social facebook">
                 <FacebookShareButton url={url}>
-                  <FacebookIcon size={32} round />
+                  <FacebookIcon size={20} round />
                 </FacebookShareButton>
+              </a>
+              <a className="button social twitter">
                 <TwitterShareButton url={url}>
-                  <TwitterIcon size={32} round />
+                  <TwitterIcon size={20} round />
                 </TwitterShareButton>
+              </a>
+              <a className="button social linkedin">
                 <LinkedinShareButton url={url}>
-                  <LinkedinIcon size={32} round />
+                  <LinkedinIcon size={20} round />
                 </LinkedinShareButton>
+              </a>
+              <a className=" button social google-plus">
                 <GooglePlusShareButton url={url}>
-                  <GooglePlusIcon size={32} round />
+                  <GooglePlusIcon size={20} round />
                 </GooglePlusShareButton>
-              </div>
+              </a>
+              <button className="button-like" onClick={saveFavourites}>
+                <i className="fa fa-heart" />
+                <span>Favourite</span>
+              </button>
+              <div id="snackbar">Added to favourites</div>
             </div>
+          </div>
+          <div className="small-12 medium-3 columns flex-container align-middle">
+            <img src={urlToImage} alt="Not  available" />
           </div>
         </div>
       </div>
+
+
     );
   }
 }
@@ -84,7 +125,6 @@ Articles.propTypes = {
   url: PropTypes.string,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
-  publishedAt: PropTypes.string
 };
 
 Articles.defaultProps = {

@@ -4,7 +4,10 @@ import HeadlineSearch from './HeadlineSearch';
 import Articles from './Articles';
 import SourcesStore from '../store/SourcesStore';
 import ArticlesStore from '../store/ArticlesStore';
+import Nav from './Nav';
 import { fetchAllNewsSources, fetchAllArticles } from '../action/fluxActions';
+import { snackToast } from '../styles/snack-bar';
+
 /**
  * This class renders the NewsHome component which is the main page
  * to view the news sources
@@ -30,6 +33,7 @@ export class NewsHome extends Component {
     this.getArticles = this.getArticles.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.filteredSearch = this.filteredSearch.bind(this);
+    this.fetchFavArticles = this.fetchFavArticles.bind(this);
   }
   /**
    * This method mounts the fetchAllNewsSources action function when it is about
@@ -73,6 +77,13 @@ export class NewsHome extends Component {
     this.setState({
       altArticles: ArticlesStore.getAllNewsArticles().articles,
       articleTitle: ArticlesStore.getAllNewsArticles().articleSource
+    });
+  }
+
+  fetchFavArticles() {
+    this.setState({
+      altArticles: JSON.parse(localStorage.getItem('favourites')),
+      articleTitle: 'FAVOURITES'
     });
   }
   /**
@@ -127,7 +138,8 @@ export class NewsHome extends Component {
     );
     return (
       <div>
-        <div className="row">
+        <Nav handleFavBtn={this.fetchFavArticles} />
+        <div className="row" style={{ marginTop: '40px' }}>
           <div className="column small-right small-11 medium-6 large-5">
             <div className="container">
               <HeadlineSearch onSearch={this.handleSearch} top={top} />
