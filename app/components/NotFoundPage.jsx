@@ -3,9 +3,9 @@ import React from 'react';
 
 const NotFoundPage = () => (
 
-  <div>
+  <div className="centered">
     <h1>404 - Page Not Found</h1>
-    <p>Im sorry, the page you were looking for cannot be found!</p>
+    <p>You want me to fail my checkpoint abi? Oya commot from here!!!</p>
   </div>
     );
 

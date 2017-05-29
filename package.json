@@ -19,6 +19,7 @@
     "express": "^4.13.4",
     "file-loader": "^0.11.1",
     "flux": "^2.1.1",
+    "history": "^4.6.1",
     "js-cookie": "^2.1.4",
     "prop-types": "^0.2.0",
     "react": "^0.14.7",
