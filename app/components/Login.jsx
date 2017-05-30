@@ -31,14 +31,11 @@ class Login extends React.Component {
  */
   responseGoogle(response) {
     const userProfile = response.profileObj;
-    console.log(userProfile);
     const history = createHistory({ forceRefresh: true });
     if (!response.error) {
       global.window.localStorage.setItem('profile', JSON.stringify(userProfile));
       history.push('/#/news_home');
       global.window.location.reload();
-      console.log(userProfile);
-      //window.location = '/#/news_home';
     } else {
       // alert('Google log in error');
     }

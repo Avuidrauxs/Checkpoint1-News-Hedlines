@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "jest --coverage",
+    "alt-coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "start": "node server.js"
   },
   "author": "Audax Anchirianh",
