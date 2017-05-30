@@ -16,23 +16,12 @@ class HeadlineList extends React.Component {
  */
   render() {
     const { sources } = this.props;
-    const renderHeadlines = () => sources.map((source) => {
-      if (source.sortBysAvailable.indexOf('latest') > 0) {
-        return (
-          <HeadlineItem
-            key={source.id}
-            {...source}
-            showLatest={false}
-          />
-        );
-      }
-      return (
-        <HeadlineItem
-          key={source.id}
-          {...source}
-          showLatest
-        />);
-    });
+    const renderHeadlines = () => sources.map(source => (
+      <HeadlineItem
+        key={source.id}
+        {...source}
+      />
+        ));
 
     return (
       <div>

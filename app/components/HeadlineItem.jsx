@@ -15,9 +15,9 @@ class HeadlineItem extends React.Component {
  */
   constructor(props) {
     super(props);
-    this.state = { isChecked: false };
+    this.state = { isChecked: false, newsHome: new NewsHome() };
+    this.handleViewArticlesBtn = this.handleViewArticlesBtn.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 /**
@@ -25,10 +25,10 @@ class HeadlineItem extends React.Component {
  * @param  {object} e - handles events from button
  * @return {null}   - no return values
  */
-  handleSubmit(e) {
+  handleViewArticlesBtn(e) {
     e.preventDefault();
-    const { id } = this.props;
-    new NewsHome().handleGetArticles(id.toLowerCase(), false);
+    const { id, sortBysAvailable } = this.props;
+    this.state.newsHome.handleGetArticles(id.toLowerCase(), sortBysAvailable[0]);
     if (this.state.isChecked) {
       this.setState({ isChecked: !this.state.isChecked });
     }
@@ -36,16 +36,18 @@ class HeadlineItem extends React.Component {
 /**
  * This function handles getting Latest headlines when the checkbox is checked
  * @memberof HeadlineItem
+ * @param {object} e - handles events from radio button
  * @return {null} - no return value
  */
-  handleCheckbox() {
-    const { id } = this.props;
+  handleCheckbox(e) {
+    const { id, sortBysAvailable } = this.props;
+    const sortValue = e.target.value;
     if (!this.state.isChecked) {
-      new NewsHome().handleGetArticles(id.toLowerCase(), true);
-      this.setState({ isChecked: true });
+      this.state.newsHome.handleGetArticles(id.toLowerCase(), sortValue);
+      this.setState({ isChecked: !this.state.isChecked });
     } else {
-      new NewsHome().handleGetArticles(id.toLowerCase(), false);
-      this.setState({ isChecked: false });
+      this.state.newsHome.handleGetArticles(id.toLowerCase(), sortBysAvailable[0]);
+      this.setState({ isChecked: !this.state.isChecked });
     }
   }
 
@@ -55,23 +57,27 @@ class HeadlineItem extends React.Component {
  * @return {null} -returns no value
  */
   render() {
-    const { name, description, showLatest, htmlFor } = this.props;
+    const { name, description, htmlFor, sortBysAvailable } = this.props;
+    const renderSorts = sort => <div key={sort}>
+      <input
+        type="checkbox"
+        name="sort"
+        value={sort}
+        onChange={this.handleCheckbox}
+        checked={this.state.isChecked}
+      />
+      <label
+        htmlFor={htmlFor}
+      >{sort}
+      </label></div>;
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <h4>{name}</h4>
-          <p>{description}.</p>
-          <button className="button" >View Articles</button>
-          <label htmlFor={htmlFor} hidden={showLatest}>
-            <input
-              type="checkbox"
-              checked={this.state.isChecked}
-              onChange={this.handleCheckbox}
-              hidden={showLatest}
-            />
-            Latest Headlines
-          </label>
-        </form>
+        <h4>{name}</h4>
+        <p>{description}.</p>
+        <button className="button" onClick={this.handleViewArticlesBtn}>View Articles</button>
+        <div>
+          <group className="inline-radio">{sortBysAvailable.slice(1).map(renderSorts)}</group>
+        </div>
       </div>
     );
   }
@@ -82,14 +88,14 @@ HeadlineItem.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   id: PropTypes.string,
-  showLatest: PropTypes.bool,
+  sortBysAvailable: PropTypes.array,
   htmlFor: PropTypes.string
 };
 HeadlineItem.defaultProps = {
   name: '',
   description: '',
   id: '#',
-  showLatest: false,
+  sortBysAvailable: [],
   htmlFor: ''
 };
 export default HeadlineItem;

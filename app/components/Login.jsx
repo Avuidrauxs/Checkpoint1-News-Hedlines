@@ -1,4 +1,5 @@
 import React from 'react';
+import createHistory from 'history/createBrowserHistory';
 import GoogleLogin from 'react-google-login';
 // import PropTypes from 'prop-types';
 import gplus from '../images/gplus.png';
@@ -30,16 +31,11 @@ class Login extends React.Component {
  */
   responseGoogle(response) {
     const userProfile = response.profileObj;
+    const history = createHistory({ forceRefresh: true });
     if (!response.error) {
-      this.setState({
-        credentials: {
-          email: userProfile.email,
-          name: userProfile.name
-        }
-      });
-      // localStorage.setItem('jwtToken', 'I dey');
-      // new Nav().checkToken();
-      window.location = '/#/news_home';
+      global.window.localStorage.setItem('profile', JSON.stringify(userProfile));
+      history.push('/#/news_home');
+      global.window.location.reload();
     } else {
       // alert('Google log in error');
     }
@@ -51,23 +47,34 @@ class Login extends React.Component {
    */
   render() {
     return (
-      <div className="large-3 large-centered columns">
-        <div className="login-box">
-          <div className="row">
-            <div className="large-12 columns">
-              <form>
-                <div className="row centered">
-                  <div>
-                    <p>Welcome to the Bad News App sign in to view news sources</p>
-                  </div>
-                  <GoogleLogin
-                    clientId={process.env.GOOGLE_CLIENT_ID}
-                    buttonText="Sign In"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                  ><img src={gplus} alt="G-login" /></GoogleLogin>
-                </div>
-              </form>
+      <div className="login-box">
+        <div className="row collapse expanded">
+          <div className="small-12 medium-6 column small-order-2 medium-order-1">
+            <div className="login-box-form-section">
+              <h1 className="login-box-title">Welcome to</h1>
+              <h1>Bad News App</h1>
+              <h3 className="login-box-title">This website gives news all over the globe</h3>
+
+            </div>
+            <div className="or">ENTER</div>
+          </div>
+          <div
+            className="small-12 medium-6
+            column small-order-1
+            medium-order-2
+            login-box-social-section"
+          >
+            <div className="login-box-social-section-inner">
+              <span className="login-box-social-headline">
+                Sign in with<br />your social network
+              </span>
+              <a className="login-box-social-button-google">
+                <GoogleLogin
+                  clientId={process.env.GOOGLE_CLIENT_ID}
+                  buttonText="Sign In"
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                ><img src={gplus} alt="G-login" /></GoogleLogin></a>
             </div>
           </div>
         </div>

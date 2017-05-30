@@ -15,5 +15,5 @@ describe('Headlines List', () => {
        const div = document.createElement('div');
        ReactDOM.render(<HeadlineList/>, div);
    });
-  
+
 });
