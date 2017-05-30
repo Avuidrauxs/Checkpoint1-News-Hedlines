@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import $ from 'jquery';
 
 
 import HeadlineSearch from '../../components/HeadlineSearch';
 import NewsHome from '../../components/NewsHome';
+
+
+
+global.window = window
+global.$ = require('jquery');
 
 describe('Headline Search', () => {
   const newsSources = [{

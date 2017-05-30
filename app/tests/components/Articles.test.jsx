@@ -18,10 +18,17 @@ describe('Articles', () => {
   it('should exist', () => {
     expect(Articles).toExist();
   });
+  // it('renders without crashing', () => {
+  //      const div = document.createElement('div');
+  //      ReactDOM.render(<Articles title={articles.title} description={articles.description}
+  //        url={articles.url} urlToImage={articles.author} author={articles.author}
+  //        publishedAt={articles.publishedAt}/>, div);
+  //  });
   it('renders without crashing', () => {
-       const div = document.createElement('div');
-       ReactDOM.render(<Articles title={articles.title} description={articles.description}
+       const div = shallow(<Articles title={articles.title} description={articles.description}
          url={articles.url} urlToImage={articles.author} author={articles.author}
-         publishedAt={articles.publishedAt}/>, div);
+         publishedAt={articles.publishedAt}/>)
+
    });
+
 });

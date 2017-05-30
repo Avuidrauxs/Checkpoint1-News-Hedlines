@@ -14,6 +14,7 @@ Main.propTypes = {
     React.PropTypes.node
   ]).isRequired
 };
-
-
+Main.defaultProps = {
+  cheildren: {}
+};
 export default Main;

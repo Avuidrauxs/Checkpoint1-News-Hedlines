@@ -16,6 +16,34 @@ import { snackToast } from '../styles/snack-bar';
 export default class Articles extends React.Component {
 
 /**
+ * This is the Articles class cosntructor
+ * @param  {array} props - contains prop parameters
+ * @return {null}       - returns nothing
+ */
+  constructor(props) {
+    super(props);
+    this.saveFavourites = this.saveFavourites.bind(this);
+  }
+/**
+ * This function saves favourite articles
+ * @return {null} - returns nothing
+ */
+  saveFavourites() {
+    snackToast();
+    let favArticlesArray = [];
+    const favArticles = {
+      ...this.props
+    };
+    if (localStorage.getItem('favourites')) {
+      favArticlesArray = JSON.parse(localStorage.getItem('favourites'));
+      favArticlesArray.push(favArticles);
+      localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
+    } else {
+      favArticlesArray.push(favArticles);
+      localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
+    }
+  }
+/**
  * This function renders the hierachy of views for Article component
  * @return {React.Component} returns a react component
  */
@@ -27,21 +55,6 @@ export default class Articles extends React.Component {
       urlToImage,
       author,
     } = this.props;
-    let favArticlesArray = [];
-    const saveFavourites = () => {
-      snackToast();
-      const favArticles = {
-        ...this.props
-      };
-      if (localStorage.getItem('favourites')) {
-        favArticlesArray = JSON.parse(localStorage.getItem('favourites'));
-        favArticlesArray.push(favArticles);
-        localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
-      } else {
-        favArticlesArray.push(favArticles);
-        localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
-      }
-    };
     const {
   FacebookShareButton,
   GooglePlusShareButton,
@@ -67,7 +80,7 @@ export default class Articles extends React.Component {
             >
               <em>by
                 <a href={url} target="_blank" rel="noopener noreferrer">
-                  {!author ? ' Anonnymous' : author }
+                  {!author ? ' Anonnymous' : ` ${author}` }
                 </a>
               </em>
             </p>
@@ -77,7 +90,7 @@ export default class Articles extends React.Component {
               <a
                 href={url}
                 target="_blank" rel="noopener noreferrer" className="read-more"
-              >Read more
+              >...Read more
               </a></p>
             <div className="article-social">
 
@@ -101,7 +114,7 @@ export default class Articles extends React.Component {
                   <GooglePlusIcon size={20} round />
                 </GooglePlusShareButton>
               </a>
-              <button className="button-like" onClick={saveFavourites}>
+              <button className="button-like" onClick={this.saveFavourites}>
                 <i className="fa fa-heart" />
                 <span>Favourite</span>
               </button>

@@ -1,4 +1,6 @@
-$(document).foundation();
+
+
+
 
 $(function() {
   $('.button-like')
