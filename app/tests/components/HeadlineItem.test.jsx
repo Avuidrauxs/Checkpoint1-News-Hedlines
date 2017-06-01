@@ -41,9 +41,16 @@ describe('Headline Item', () => {
    });
    it('should access class method "handleCheckbox" in props',()=>{
      const handleCheckbox = jest.fn();
+     const e = {
+       target: {
+         value: true
+       }
+     };
      const component = mount(<HeadlineItem onChange={handleCheckbox}/>);
      expect(component.props().onChange).toBe(handleCheckbox);
      component.setState({isChecked: true});
      expect(component.state().isChecked).toBe(true);
+     component.instance().handleCheckbox(e);
+
    });
 });
