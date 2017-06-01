@@ -72,6 +72,7 @@ class HeadlineSearch extends React.Component {
           placeholder="Enter a news source you want"
           value={this.state.searchText}
           onChange={this.handleSearch}
+          style={{ marginTop: '15px' }}
         />
       </div>
 

@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav should render a snapshot 1`] = `
+<div
+  className="top-bar"
+>
+  <div
+    className="top-bar-left"
+  >
+    <ul
+      className="menu menu-left"
+    >
+      <li>
+        <h4>
+          Bad News App
+        </h4>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="profile-pic"
+    style={
+      Object {
+        "marginRight": "30px",
+      }
+    }
+  >
+    <img
+      alt="no-pic"
+      src="https://lh6.googleusercontent.com/-V-2u0o-CEFI/AAAAAAAAAAI/AAAAAAAABHo/QQ-SVzoEiag/s96-c/photo.jpg"
+    />
+  </div>
+  <div
+    className="top-bar-right"
+  >
+    <ul
+      className="menu menu-right"
+    >
+      <li>
+        <button
+          className="button"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "green",
+              "marginRight": "10px",
+            }
+          }
+        >
+          View Favourites
+        </button>
+      </li>
+      <li>
+        <button
+          className="button"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundColor": "red",
+              "marginRight": "80px",
+            }
+          }
+        >
+          Logout, 
+          Audax
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

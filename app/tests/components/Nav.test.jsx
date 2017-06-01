@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import expect from 'expect';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
+import expects from 'expect';
+import { shallow, mount } from 'enzyme';
 
 
 import Nav from '../../components/Nav';
 
 describe('Nav', () => {
   it('should exist', () => {
-    expect(Nav).toExist();
+    expects(Nav).toExist();
   });
   it('renders without crashing', () => {
     const userProfile = {
@@ -21,5 +21,19 @@ describe('Nav', () => {
     };
     localStorage.setItem('profile', JSON.stringify(userProfile));
        const div = shallow(<Nav/>);
+   });
+   it('should render a snapshot',() => {
+     const tree = renderer.create(<Nav />).toJSON();
+     expect(tree).toMatchSnapshot();
+   });
+   it('should access class method "handleFavouriteBtn" in props',()=>{
+     const handleFavouriteBtn = jest.fn();
+     const component = mount(<Nav onClick={handleFavouriteBtn}/>);
+     expect(component.props().onClick).toBe(handleFavouriteBtn);
+    //  const button = component.find('button');
+    //  expect(button).toBeDefined();
+    //  button.simulate('click');
+    //  expect(handleFavouriteBtn).toBeCalled()
+
    });
 });

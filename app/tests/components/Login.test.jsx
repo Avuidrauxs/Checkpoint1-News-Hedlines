@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import renderer from 'react-test-renderer';
 import expect from 'expect';
 import { shallow } from 'enzyme'
 
@@ -14,4 +14,8 @@ describe('Login', () => {
   it('renders without crashing', () => {
        const wrapper = shallow(<Login/>);
    });
+  //  it('should render a snapshot',() => {
+  //    const tree = renderer.create(<Login />).toJSON();
+  //    expect(tree).toMatchSnapshot();
+  //  });
 });
