@@ -4,7 +4,7 @@
   "description": "A news headline app",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --covergae",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "alt-coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "start": "node server.js"
