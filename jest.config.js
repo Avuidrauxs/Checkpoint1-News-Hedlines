@@ -1,7 +1,7 @@
 module.exports = {
   moduleFileExtensions: ['js', 'jsx'],
   moduleNameMapper: {
-    Articles: '<rootDir>/app/components/Articles.jsx',
+
     HeadlineItem: '<rootDir>/app/components/HeadlineItem.jsx',
     HeadlineList: '<rootDir>/app/components/HeadlineList.jsx',
     HeadlineSearch: '<rootDir>/app/components/HeadlineSearch.jsx',
@@ -20,7 +20,7 @@ module.exports = {
   setupFiles: ['<rootDir>/app/tests/__mock__/jqueryMock.js',
     '<rootDir>/app/tests/__mock__/localStorageMock.js'],
   collectCoverage: true,
-  coverageDirectory: '<rootDir>',
+  coverageDirectory: '<rootDir>/coverage',
   coverageReporters: ['lcov'],
   collectCoverageFrom: [
     '**/app/action/**', '**/app/store/**', '**/app/components/**',

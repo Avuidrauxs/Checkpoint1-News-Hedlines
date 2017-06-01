@@ -18,27 +18,19 @@ class Login extends React.Component {
  */
   constructor(props) {
     super(props);
-    this.state = { credentials: {
-      email: '',
-      name: ''
-    } };
-    this.responseGoogle = this.responseGoogle.bind(this);
+    this.saveGoogleCredentials = this.saveGoogleCredentials.bind(this);
   }
 /**
- * This method ha
- * @param  {[type]} response [description]
- * @return {[type]}          [description]
+ * This method saves the googles response object to localStorage
+ * @param  {response} response - google id response object
+ * @return {null}          nothing is returned
  */
-  responseGoogle(response) {
+  saveGoogleCredentials(response) {
     const userProfile = response.profileObj;
     const history = createHistory({ forceRefresh: true });
-    if (!response.error) {
-      global.window.localStorage.setItem('profile', JSON.stringify(userProfile));
-      history.push('/#/news_home');
-      global.window.location.reload();
-    } else {
-      // alert('Google log in error');
-    }
+    localStorage.setItem('profile', JSON.stringify(userProfile));
+    history.push('/#/news_home');
+    window.location.reload();
   }
   /**
    * This method renders the components
@@ -56,7 +48,6 @@ class Login extends React.Component {
               <h3 className="login-box-title">This website gives news all over the globe</h3>
 
             </div>
-            <div className="or">ENTER</div>
           </div>
           <div
             className="small-12 medium-6
@@ -66,14 +57,14 @@ class Login extends React.Component {
           >
             <div className="login-box-social-section-inner">
               <span className="login-box-social-headline">
-                Sign in with<br />your social network
+                Sign in with<br />Google+
               </span>
               <a className="login-box-social-button-google">
                 <GoogleLogin
                   clientId={process.env.GOOGLE_CLIENT_ID}
                   buttonText="Sign In"
-                  onSuccess={this.responseGoogle}
-                  onFailure={this.responseGoogle}
+                  onSuccess={this.saveGoogleCredentials}
+                  onFailure={this.saveGoogleCredentials}
                 ><img src={gplus} alt="G-login" /></GoogleLogin></a>
             </div>
           </div>

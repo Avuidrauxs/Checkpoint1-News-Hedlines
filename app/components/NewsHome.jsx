@@ -3,15 +3,13 @@ import HeadlineList from './HeadlineList';
 import HeadlineSearch from './HeadlineSearch';
 import Articles from './Articles';
 import SourcesStore from '../store/SourcesStore';
-import ArticlesStore from '../store/ArticlesStore';
+import ArticlesStore from '../store/NewsArticlesStore';
 import Nav from './Nav';
-import { fetchAllNewsSources, fetchAllArticles } from '../action/fluxActions';
-import { snackToast } from '../styles/snack-bar';
+import { fetchAllNewsSources, fetchAllArticles } from '../action/NewsActions';
 
 /**
  * This class renders the NewsHome component which is the main page
  * to view the news sources
- * @class NewsHome
  * @type {Object}
  * @extends {React.Component}
  */
@@ -25,15 +23,15 @@ export class NewsHome extends Component {
     super(props);
     this.state = {
       searchText: '',
-      altSources: [],
-      altArticles: [],
+      newsSources: [],
+      allArticles: [],
       articleTitle: 'Select a news source to view articles'
     };
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.filteredSearch = this.filteredSearch.bind(this);
-    this.fetchFavArticles = this.fetchFavArticles.bind(this);
+    this.fetchFavourites = this.fetchFavourites.bind(this);
   }
   /**
    * This method mounts the fetchAllNewsSources action function when it is about
@@ -65,7 +63,7 @@ export class NewsHome extends Component {
    */
   getSources() {
     this.setState({
-      altSources: SourcesStore.getAllNewsSources()
+      newsSources: SourcesStore.getAllNewsSources()
     });
   }
 /**
@@ -75,14 +73,17 @@ export class NewsHome extends Component {
  */
   getArticles() {
     this.setState({
-      altArticles: ArticlesStore.getAllNewsArticles().articles,
+      allArticles: ArticlesStore.getAllNewsArticles().articles,
       articleTitle: ArticlesStore.getAllNewsArticles().articleSource
     });
   }
-
-  fetchFavArticles() {
+  /**
+   * This method fetches favourite news articles
+   * @return {null} - returns nothing
+   */
+  fetchFavourites() {
     this.setState({
-      altArticles: JSON.parse(localStorage.getItem('favourites')),
+      allArticles: JSON.parse(localStorage.getItem('favourites')),
       articleTitle: 'FAVOURITES'
     });
   }
@@ -94,9 +95,7 @@ export class NewsHome extends Component {
    * @return {array}           - returns an array 'filteredSearch'
    */
   filteredSearch(newsSources, searchText) {
-    let filteredSearch = newsSources;
-
-    filteredSearch = filteredSearch.filter((source) => {
+    const filteredSearch = newsSources.filter((source) => {
       const text = source.name.toLowerCase();
       return searchText.length === 0 || text.indexOf(searchText) > -1;
     });
@@ -131,14 +130,14 @@ export class NewsHome extends Component {
    * @return {React.Component} - returns he hierachy of views required for this component
    */
   render() {
-    const { top, searchText, altSources, altArticles, articleTitle } = this.state;
+    const { top, searchText, newsSources, allArticles, articleTitle } = this.state;
     const filteredSearch = this.filteredSearch(
-      altSources,
+      newsSources,
       searchText
     );
     return (
       <div>
-        <Nav handleFavBtn={this.fetchFavArticles} />
+        <Nav handleFavBtn={this.fetchFavourites} />
         <div className="row" style={{ marginTop: '40px' }}>
           <div className="column small-right small-11 medium-6 large-5">
             <div className="container">
@@ -151,7 +150,7 @@ export class NewsHome extends Component {
           <div className="small-right 5">
             <h5 className="page-title">{articleTitle.toUpperCase()}</h5>
             <div className="container-hybrid">
-              {altArticles.map(article => (
+              {allArticles.map(article => (
 
                 <Articles
                   key={article.title}

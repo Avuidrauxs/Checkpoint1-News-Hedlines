@@ -23,15 +23,15 @@ class Nav extends Component {
   }
 
   /**
-   * Log the user out when visited
-   * @return {null} redirects user to login page
+   * This function logs the user out
+   * @return {null} returns nothing
    */
   logOut () {
     const history = createHistory({ forceRefresh: true });
-    if (global.window.localStorage.getItem('profile')) {
-      global.window.localStorage.clear();
+    if (localStorage.getItem('profile')) {
+      localStorage.clear();
       history.push('/#/');
-      global.window.location.reload();
+      window.location.reload();
     }
   }
   /**
@@ -49,13 +49,19 @@ class Nav extends Component {
    * @return {React.Component} - returns a hierachy of views to form the component
    */
   render() {
-    const userProfile = JSON.parse(global.window.localStorage.getItem('profile'));
+    const userProfile = JSON.parse(localStorage.getItem('profile'));
     return (
       <div className="top-bar">
         <div className="top-bar-left">
           <ul className="menu menu-left">
             <li><h4>Bad News App</h4></li>
           </ul>
+        </div>
+        <div className="profile-pic" style={{ marginRight: '30px' }}>
+          <img
+            src={!userProfile.imageUrl ? profilePlaceholder : userProfile.imageUrl}
+            alt="no-pic"
+          />
         </div>
         <div className="top-bar-right">
           <ul className="menu menu-right" >
@@ -67,17 +73,11 @@ class Nav extends Component {
                 View Favourites</button></li>
             <li><button
               className="button"
-              style={{ marginRight: '30px', backgroundColor: 'red' }}
+              style={{ marginRight: '80px', backgroundColor: 'red' }}
               onClick={this.logOut}
             >
                 Logout, {userProfile.givenName}
             </button></li>
-            <div className="profile-pic">
-              <img
-                src={!userProfile.imageUrl ? profilePlaceholder : userProfile.imageUrl}
-                alt="no-pic"
-              />
-            </div>
           </ul>
         </div>
       </div>

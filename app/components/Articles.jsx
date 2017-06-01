@@ -30,17 +30,17 @@ export default class Articles extends React.Component {
  */
   saveFavourites() {
     snackToast();
-    let favArticlesArray = [];
-    const favArticles = {
+    let favouriteArticles = [];
+    const favourite = {
       ...this.props
     };
     if (localStorage.getItem('favourites')) {
-      favArticlesArray = JSON.parse(localStorage.getItem('favourites'));
-      favArticlesArray.push(favArticles);
-      localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
+      favouriteArticles = JSON.parse(localStorage.getItem('favourites'));
+      favouriteArticles.push(favourite);
+      localStorage.setItem('favourites', JSON.stringify(favouriteArticles));
     } else {
-      favArticlesArray.push(favArticles);
-      localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
+      favouriteArticles.push(favourite);
+      localStorage.setItem('favourites', JSON.stringify(favouriteArticles));
     }
   }
 /**
@@ -114,10 +114,12 @@ export default class Articles extends React.Component {
                   <GooglePlusIcon size={20} round />
                 </GooglePlusShareButton>
               </a>
-              <button className="button-like" onClick={this.saveFavourites}>
-                <i className="fa fa-heart" />
-                <span>Favourite</span>
-              </button>
+              <a className="button" style={{ backgroundColor: 'white' }}>
+                <button className="button-like" onClick={this.saveFavourites}>
+                  <i className="fa fa-heart" />
+                  <span>Favourite</span>
+                </button>
+              </a>
               <div id="snackbar">Added to favourites</div>
             </div>
           </div>
