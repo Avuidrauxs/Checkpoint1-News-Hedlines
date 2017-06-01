@@ -18,10 +18,6 @@ class Login extends React.Component {
  */
   constructor(props) {
     super(props);
-    this.state = { credentials: {
-      email: '',
-      name: ''
-    } };
     this.saveGoogleCredentials = this.saveGoogleCredentials.bind(this);
   }
 /**
@@ -32,13 +28,9 @@ class Login extends React.Component {
   saveGoogleCredentials(response) {
     const userProfile = response.profileObj;
     const history = createHistory({ forceRefresh: true });
-    if (!response.error) {
-      localStorage.setItem('profile', JSON.stringify(userProfile));
-      history.push('/#/news_home');
-      window.location.reload();
-    } else {
-      // alert('Google log in error');
-    }
+    localStorage.setItem('profile', JSON.stringify(userProfile));
+    history.push('/#/news_home');
+    window.location.reload();
   }
   /**
    * This method renders the components
