@@ -4,8 +4,8 @@ import {
   ShareButtons,
   generateShareIcon
 } from 'react-share';
-import '../styles/favourite-button';
-import { snackToast } from '../styles/snack-bar';
+import pop from '../styles/favourite-button';
+
 
 /**
  * This component renders Articles
@@ -26,22 +26,23 @@ export default class Articles extends React.Component {
   }
 /**
  * This function saves favourite articles
+ * @param {object} e - the event object
  * @return {null} - returns nothing
  */
-  saveFavourites() {
-    snackToast();
-    let favouriteArticles = [];
-    const favourite = {
-      ...this.props
-    };
-    if (localStorage.getItem('favourites')) {
-      favouriteArticles = JSON.parse(localStorage.getItem('favourites'));
-      favouriteArticles.push(favourite);
-      localStorage.setItem('favourites', JSON.stringify(favouriteArticles));
-    } else {
-      favouriteArticles.push(favourite);
-      localStorage.setItem('favourites', JSON.stringify(favouriteArticles));
-    }
+  saveFavourites(e) {
+    pop(e.target.id, this.props);
+    // let favouriteArticles = [];
+    // const favourite = {
+    //   ...this.props
+    // };
+    // if (localStorage.getItem('favourites')) {
+    //   favouriteArticles = JSON.parse(localStorage.getItem('favourites'));
+    //   favouriteArticles.push(favourite);
+    //   localStorage.setItem('favourites', JSON.stringify(favouriteArticles));
+    // } else {
+    //   favouriteArticles.push(favourite);
+    //   localStorage.setItem('favourites', JSON.stringify(favouriteArticles));
+    // }
   }
 /**
  * This function renders the hierachy of views for Article component
@@ -115,12 +116,13 @@ export default class Articles extends React.Component {
                 </GooglePlusShareButton>
               </a>
               <a className="button" style={{ backgroundColor: 'white' }}>
-                <button className="button-like" onClick={this.saveFavourites}>
+                <button id={title} className="button-like" onClick={this.saveFavourites}>
                   <i className="fa fa-heart" />
                   <span>Favourite</span>
                 </button>
               </a>
               <div id="snackbar">Added to favourites</div>
+              <div id="unFavourite">Removed from favourites</div>
             </div>
           </div>
           <div className="small-12 medium-3 columns flex-container align-middle">

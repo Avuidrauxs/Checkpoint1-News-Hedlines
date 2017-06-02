@@ -5,8 +5,7 @@ import dispatcher from '../dispatcher';
  * This function fetches all News Sources
  * @return {null}   - returns nothing
  */
-export const fetchAllNewsSources = () => {
-  return axios.get(process.env.NEWS_API_URL).then(
+export const fetchAllNewsSources = () => axios.get(process.env.NEWS_API_URL).then(
       (res) => {
         dispatcher.dispatch({
           type: 'FETCH_ALL_NEWS',
@@ -16,7 +15,6 @@ export const fetchAllNewsSources = () => {
         throw new Error('Error no news', err);
       }
     );
-};
 
 /**
  * Fetches all the articles of the news source catergory selected

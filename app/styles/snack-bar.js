@@ -1,11 +1,11 @@
-export const snackToast = () => {
+export const snackToast = (articles) => {
     const x = document.getElementById("snackbar")
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1000);
-}
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+};
 
-export const emptyList = () => {
-    const x = document.getElementById("empty-list")
+export const removeFavourite = () => {
+    const x = document.getElementById("unFavourite")
     x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1000);
-}
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+};

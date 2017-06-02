@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 
 const Main = props => (
@@ -9,7 +8,7 @@ const Main = props => (
   );
 
 Main.propTypes = {
-  children: PropTypes.oneOfType([
+  children: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node
   ]).isRequired

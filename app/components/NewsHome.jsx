@@ -6,6 +6,7 @@ import SourcesStore from '../store/SourcesStore';
 import ArticlesStore from '../store/NewsArticlesStore';
 import Nav from './Nav';
 import { fetchAllNewsSources, fetchAllArticles } from '../action/NewsActions';
+import '../styles/favourite-button';
 
 /**
  * This class renders the NewsHome component which is the main page
