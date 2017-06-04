@@ -6,7 +6,6 @@ import SourcesStore from '../store/SourcesStore';
 import ArticlesStore from '../store/NewsArticlesStore';
 import Nav from './Nav';
 import { fetchAllNewsSources, fetchAllArticles } from '../action/NewsActions';
-import '../styles/favourite-button';
 
 /**
  * This class renders the NewsHome component which is the main page
@@ -26,7 +25,8 @@ export class NewsHome extends Component {
       searchText: '',
       newsSources: [],
       allArticles: [],
-      articleTitle: 'Select a news source to view articles'
+      articleTitle: 'Select a news source to view articles',
+      isMounted: false
     };
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
@@ -34,6 +34,7 @@ export class NewsHome extends Component {
     this.filteredSearch = this.filteredSearch.bind(this);
     this.fetchFavourites = this.fetchFavourites.bind(this);
   }
+
   /**
    * This method mounts the fetchAllNewsSources action function when it is about
    *to be rendered on the DOM. Props are passed to the action method and an API call is made.
@@ -42,10 +43,12 @@ export class NewsHome extends Component {
    * @return {null} - returns no value
    */
   componentDidMount() {
+    this.state.isMounted = true;
     fetchAllNewsSources();
     SourcesStore.on('change', this.getSources);
     ArticlesStore.on('change', this.getArticles);
   }
+
   /**
    *
    *This method unmounts the rendered component using the removeListener method and updates the
@@ -54,9 +57,11 @@ export class NewsHome extends Component {
    * @return {null} - returns no value
    */
   componentWillUnmount() {
+    this.state.isMounted = false;
     SourcesStore.removeListener('change', this.getSources);
     ArticlesStore.removeListener('change', this.getArticles);
   }
+
   /**
    * This method fetches all the news sources from the store and sets the sources state
    * @memberof NewsHome
@@ -67,16 +72,19 @@ export class NewsHome extends Component {
       newsSources: SourcesStore.getAllNewsSources()
     });
   }
+
 /**
  * This method fetches all articles based on the newsource seelected and sets the articles state
  * @memberof NewsHome
  * @return {null} - returns no value
  */
   getArticles() {
-    this.setState({
-      allArticles: ArticlesStore.getAllNewsArticles().articles,
-      articleTitle: ArticlesStore.getAllNewsArticles().articleSource
-    });
+    if (this.state.isMounted === true) {
+      this.setState({
+        allArticles: ArticlesStore.getAllNewsArticles().articles,
+        articleTitle: ArticlesStore.getAllNewsArticles().articleSource
+      });
+    }
   }
   /**
    * This method fetches favourite news articles
@@ -88,6 +96,7 @@ export class NewsHome extends Component {
       articleTitle: 'FAVOURITES'
     });
   }
+
   /**
    * This method is for searching throught the news sources list
    * @memberof NewsHome
@@ -102,6 +111,7 @@ export class NewsHome extends Component {
     });
     return filteredSearch;
   }
+
   /**
    * This method handles the fetching of News source articles by dispatching an action
    * and triggering an event
@@ -114,6 +124,7 @@ export class NewsHome extends Component {
     fetchAllArticles(sourceID, sort);
     ArticlesStore.on('change', this.getArticles);
   }
+
 /**
  * This method handles setting the searchText state with test from the search input component
  * @memberof NewsHome
@@ -125,6 +136,7 @@ export class NewsHome extends Component {
       searchText: searchText.toLowerCase(),
     });
   }
+
   /**
    * This renders the  component
    * @memberof NewsHome
@@ -161,6 +173,7 @@ export class NewsHome extends Component {
                   publishedAt={article.publishedAt}
                   urlToImage={article.urlToImage}
                   author={article.author}
+                  like={article.like}
                 />
             ))}
             </div>

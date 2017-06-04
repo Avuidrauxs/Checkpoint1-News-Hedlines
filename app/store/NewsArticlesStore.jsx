@@ -27,6 +27,7 @@ class NewsArticlesStore extends EventEmitter {
   getAllNewsArticles() {
     return { articles: this.articles, articleSource: this.articleSource };
   }
+
   /**
    * This function listens for payLoad from the action and stores them
    * according to their action type.
