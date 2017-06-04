@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import createHistory from 'history/createBrowserHistory';
-// const { Link } = require('react-router');
 import profilePlaceholder from '../images/profile-placeholder.png';
 
 /**
@@ -34,10 +33,11 @@ class Nav extends Component {
       window.location.reload();
     }
   }
+
   /**
    * This function handles the View Articles button
    * @memberof Nav
-   * @return {null} [description]
+   * @return {null} - returns nothing
    */
   handleFavouriteBtn() {
     this.props.handleFavBtn();
@@ -59,7 +59,9 @@ class Nav extends Component {
         </div>
         <div className="profile-pic" style={{ marginRight: '30px' }}>
           <img
-            src={!userProfile.imageUrl ? profilePlaceholder : userProfile.imageUrl}
+            src={!userProfile.imageUrl ?
+              profilePlaceholder :
+              userProfile.imageUrl}
             alt="no-pic"
           />
         </div>

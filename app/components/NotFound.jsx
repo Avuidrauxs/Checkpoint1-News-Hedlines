@@ -1,6 +1,9 @@
 import React from 'react';
 
-
+/**
+ * This is a stateless react function that will render a Not Found page
+ * @return {React.Component} - returns a react component.
+ */
 const NotFoundPage = () => (
 
   <div className="centered">

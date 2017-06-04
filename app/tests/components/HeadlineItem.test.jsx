@@ -36,8 +36,6 @@ describe('Headline Item', () => {
      const button = component.find('button');
      expect(button).toBeDefined();
      button.simulate('click');
-     // expect(viewArticles).toBeCalled()
-
    });
    it('should access class method "handleCheckbox" in props',()=>{
      const handleCheckbox = jest.fn();

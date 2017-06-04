@@ -1,9 +1,8 @@
 import React from 'react';
 import createHistory from 'history/createBrowserHistory';
 import GoogleLogin from 'react-google-login';
-// import PropTypes from 'prop-types';
-import gplus from '../images/gplus.png';
-// import Nav from './Nav';
+import gplus from '../images/google-plus-button.png';
+
 /**
  * This component handles the Signin into the app using Google login
  * @class Login
@@ -11,6 +10,7 @@ import gplus from '../images/gplus.png';
  * @type {Object}
  */
 class Login extends React.Component {
+
 /**
  * Login constructor
  * @param  {object} props - holds parameters entered from outside component
@@ -20,6 +20,7 @@ class Login extends React.Component {
     super(props);
     this.saveGoogleCredentials = this.saveGoogleCredentials.bind(this);
   }
+
 /**
  * This method saves the googles response object to localStorage
  * @param  {response} response - google id response object
@@ -32,6 +33,7 @@ class Login extends React.Component {
     history.push('/#/news_home');
     window.location.reload();
   }
+
   /**
    * This method renders the components
    * @memberof Login
@@ -41,11 +43,16 @@ class Login extends React.Component {
     return (
       <div className="login-box">
         <div className="row collapse expanded">
-          <div className="small-12 medium-6 column small-order-2 medium-order-1">
+          <div
+            className="small-12 medium-6 column small-order-2 medium-order-1"
+          >
             <div className="login-box-form-section">
               <h1 className="login-box-title">Welcome to</h1>
               <h1>Bad News App</h1>
-              <h3 className="login-box-title">This website gives news all over the globe</h3>
+              <h3
+                className="login-box-title"
+              >This website gives news all over the globe
+            </h3>
 
             </div>
           </div>

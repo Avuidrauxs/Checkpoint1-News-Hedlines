@@ -49,7 +49,5 @@ describe('Headline Search', () => {
      expect(component.state().searchText).toBe('');
      input.simulate('change', {target: { searchText: ''}} );
      expect(input.length).toEqual(1);
-
-
    });
 });
