@@ -3,15 +3,13 @@ import HeadlineList from './HeadlineList';
 import HeadlineSearch from './HeadlineSearch';
 import Articles from './Articles';
 import SourcesStore from '../store/SourcesStore';
-import ArticlesStore from '../store/ArticlesStore';
+import ArticlesStore from '../store/NewsArticlesStore';
 import Nav from './Nav';
-import { fetchAllNewsSources, fetchAllArticles } from '../action/fluxActions';
-import { snackToast } from '../styles/snack-bar';
+import { fetchAllNewsSources, fetchAllArticles } from '../action/NewsActions';
 
 /**
  * This class renders the NewsHome component which is the main page
  * to view the news sources
- * @class NewsHome
  * @type {Object}
  * @extends {React.Component}
  */
@@ -25,16 +23,18 @@ export class NewsHome extends Component {
     super(props);
     this.state = {
       searchText: '',
-      altSources: [],
-      altArticles: [],
-      articleTitle: 'Select a news source to view articles'
+      newsSources: [],
+      allArticles: [],
+      articleTitle: 'Select a news source to view articles',
+      isMounted: false
     };
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.filteredSearch = this.filteredSearch.bind(this);
-    this.fetchFavArticles = this.fetchFavArticles.bind(this);
+    this.fetchFavourites = this.fetchFavourites.bind(this);
   }
+
   /**
    * This method mounts the fetchAllNewsSources action function when it is about
    *to be rendered on the DOM. Props are passed to the action method and an API call is made.
@@ -43,10 +43,12 @@ export class NewsHome extends Component {
    * @return {null} - returns no value
    */
   componentDidMount() {
+    this.state.isMounted = true;
     fetchAllNewsSources();
     SourcesStore.on('change', this.getSources);
     ArticlesStore.on('change', this.getArticles);
   }
+
   /**
    *
    *This method unmounts the rendered component using the removeListener method and updates the
@@ -55,9 +57,11 @@ export class NewsHome extends Component {
    * @return {null} - returns no value
    */
   componentWillUnmount() {
+    this.state.isMounted = false;
     SourcesStore.removeListener('change', this.getSources);
     ArticlesStore.removeListener('change', this.getArticles);
   }
+
   /**
    * This method fetches all the news sources from the store and sets the sources state
    * @memberof NewsHome
@@ -65,27 +69,34 @@ export class NewsHome extends Component {
    */
   getSources() {
     this.setState({
-      altSources: SourcesStore.getAllNewsSources()
+      newsSources: SourcesStore.getAllNewsSources()
     });
   }
+
 /**
  * This method fetches all articles based on the newsource seelected and sets the articles state
  * @memberof NewsHome
  * @return {null} - returns no value
  */
   getArticles() {
-    this.setState({
-      altArticles: ArticlesStore.getAllNewsArticles().articles,
-      articleTitle: ArticlesStore.getAllNewsArticles().articleSource
-    });
+    if (this.state.isMounted === true) {
+      this.setState({
+        allArticles: ArticlesStore.getAllNewsArticles().articles,
+        articleTitle: ArticlesStore.getAllNewsArticles().articleSource
+      });
+    }
   }
-
-  fetchFavArticles() {
+  /**
+   * This method fetches favourite news articles
+   * @return {null} - returns nothing
+   */
+  fetchFavourites() {
     this.setState({
-      altArticles: JSON.parse(localStorage.getItem('favourites')),
+      allArticles: JSON.parse(localStorage.getItem('favourites')),
       articleTitle: 'FAVOURITES'
     });
   }
+
   /**
    * This method is for searching throught the news sources list
    * @memberof NewsHome
@@ -94,14 +105,13 @@ export class NewsHome extends Component {
    * @return {array}           - returns an array 'filteredSearch'
    */
   filteredSearch(newsSources, searchText) {
-    let filteredSearch = newsSources;
-
-    filteredSearch = filteredSearch.filter((source) => {
+    const filteredSearch = newsSources.filter((source) => {
       const text = source.name.toLowerCase();
       return searchText.length === 0 || text.indexOf(searchText) > -1;
     });
     return filteredSearch;
   }
+
   /**
    * This method handles the fetching of News source articles by dispatching an action
    * and triggering an event
@@ -114,6 +124,7 @@ export class NewsHome extends Component {
     fetchAllArticles(sourceID, sort);
     ArticlesStore.on('change', this.getArticles);
   }
+
 /**
  * This method handles setting the searchText state with test from the search input component
  * @memberof NewsHome
@@ -125,20 +136,21 @@ export class NewsHome extends Component {
       searchText: searchText.toLowerCase(),
     });
   }
+
   /**
    * This renders the  component
    * @memberof NewsHome
    * @return {React.Component} - returns he hierachy of views required for this component
    */
   render() {
-    const { top, searchText, altSources, altArticles, articleTitle } = this.state;
+    const { top, searchText, newsSources, allArticles, articleTitle } = this.state;
     const filteredSearch = this.filteredSearch(
-      altSources,
+      newsSources,
       searchText
     );
     return (
       <div>
-        <Nav handleFavBtn={this.fetchFavArticles} />
+        <Nav handleFavBtn={this.fetchFavourites} />
         <div className="row" style={{ marginTop: '40px' }}>
           <div className="column small-right small-11 medium-6 large-5">
             <div className="container">
@@ -151,7 +163,7 @@ export class NewsHome extends Component {
           <div className="small-right 5">
             <h5 className="page-title">{articleTitle.toUpperCase()}</h5>
             <div className="container-hybrid">
-              {altArticles.map(article => (
+              {allArticles.map(article => (
 
                 <Articles
                   key={article.title}
@@ -161,6 +173,7 @@ export class NewsHome extends Component {
                   publishedAt={article.publishedAt}
                   urlToImage={article.urlToImage}
                   author={article.author}
+                  like={article.like}
                 />
             ))}
             </div>

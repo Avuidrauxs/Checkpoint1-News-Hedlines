@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Headline Item should render a snapshot 1`] = `
+<div>
+  <h4>
+    
+  </h4>
+  <p>
+    
+    .
+  </p>
+  <button
+    className="button"
+    onClick={[Function]}
+  >
+    View Articles
+  </button>
+  <div>
+    <group
+      className="inline-radio"
+    />
+  </div>
+</div>
+`;

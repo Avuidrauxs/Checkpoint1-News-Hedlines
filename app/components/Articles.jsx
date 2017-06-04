@@ -4,8 +4,8 @@ import {
   ShareButtons,
   generateShareIcon
 } from 'react-share';
-import '../styles/favourite-button';
-import { snackToast } from '../styles/snack-bar';
+import showFavouriteToast from '../styles/components/js/favourite-button';
+
 
 /**
  * This component renders Articles
@@ -26,22 +26,19 @@ export default class Articles extends React.Component {
   }
 /**
  * This function saves favourite articles
+ * @param {object} event - the event object
  * @return {null} - returns nothing
  */
-  saveFavourites() {
-    snackToast();
-    let favArticlesArray = [];
-    const favArticles = {
-      ...this.props
+  saveFavourites(event) {
+    const favourite = {
+      title: this.props.title,
+      description: this.props.description,
+      url: this.props.url,
+      urlToImage: this.props.urlToImage,
+      author: this.props.author,
+      like: 'button liked',
     };
-    if (localStorage.getItem('favourites')) {
-      favArticlesArray = JSON.parse(localStorage.getItem('favourites'));
-      favArticlesArray.push(favArticles);
-      localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
-    } else {
-      favArticlesArray.push(favArticles);
-      localStorage.setItem('favourites', JSON.stringify(favArticlesArray));
-    }
+    showFavouriteToast(event.target.id, favourite);
   }
 /**
  * This function renders the hierachy of views for Article component
@@ -54,6 +51,7 @@ export default class Articles extends React.Component {
       url,
       urlToImage,
       author,
+      like,
     } = this.props;
     const {
   FacebookShareButton,
@@ -79,9 +77,7 @@ export default class Articles extends React.Component {
               className="article-author"
             >
               <em>by
-                <a href={url} target="_blank" rel="noopener noreferrer">
                   {!author ? ' Anonnymous' : ` ${author}` }
-                </a>
               </em>
             </p>
             <p
@@ -114,14 +110,23 @@ export default class Articles extends React.Component {
                   <GooglePlusIcon size={20} round />
                 </GooglePlusShareButton>
               </a>
-              <button className="button-like" onClick={this.saveFavourites}>
-                <i className="fa fa-heart" />
-                <span>Favourite</span>
-              </button>
+              <a className="button" style={{ backgroundColor: 'white' }}>
+                <button
+                  id={title}
+                  className={!like ? 'button-like' : like}
+                  onClick={this.saveFavourites}
+                >
+                  <i className="fa fa-heart" style={{ marginRight: '5px' }} />
+                  Favourite
+                </button>
+              </a>
               <div id="snackbar">Added to favourites</div>
+              <div id="unFavourite">Removed from favourites</div>
             </div>
           </div>
-          <div className="small-12 medium-3 columns flex-container align-middle">
+          <div
+            className="small-12 medium-3 columns flex-container align-middle"
+          >
             <img src={urlToImage} alt="Not  available" />
           </div>
         </div>
@@ -132,19 +137,22 @@ export default class Articles extends React.Component {
   }
 }
 
+// Setting prop types for Article component as required by the React documentation
 Articles.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   url: PropTypes.string,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
+  like: PropTypes.string
 };
 
+// Setting default prop types as required by React Documentation
 Articles.defaultProps = {
   title: PropTypes.string,
   description: PropTypes.string,
   url: PropTypes.string,
   urlToImage: PropTypes.string,
   author: PropTypes.string,
-  publishedAt: PropTypes.string
+  like: ''
 };

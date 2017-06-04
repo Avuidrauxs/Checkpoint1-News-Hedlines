@@ -1,9 +1,8 @@
 import React from 'react';
 import createHistory from 'history/createBrowserHistory';
 import GoogleLogin from 'react-google-login';
-// import PropTypes from 'prop-types';
-import gplus from '../images/gplus.png';
-// import Nav from './Nav';
+import gplus from '../images/google-plus-button.png';
+
 /**
  * This component handles the Signin into the app using Google login
  * @class Login
@@ -11,6 +10,7 @@ import gplus from '../images/gplus.png';
  * @type {Object}
  */
 class Login extends React.Component {
+
 /**
  * Login constructor
  * @param  {object} props - holds parameters entered from outside component
@@ -18,28 +18,22 @@ class Login extends React.Component {
  */
   constructor(props) {
     super(props);
-    this.state = { credentials: {
-      email: '',
-      name: ''
-    } };
-    this.responseGoogle = this.responseGoogle.bind(this);
+    this.saveGoogleCredentials = this.saveGoogleCredentials.bind(this);
   }
+
 /**
- * This method ha
- * @param  {[type]} response [description]
- * @return {[type]}          [description]
+ * This method saves the googles response object to localStorage
+ * @param  {response} response - google id response object
+ * @return {null}          nothing is returned
  */
-  responseGoogle(response) {
+  saveGoogleCredentials(response) {
     const userProfile = response.profileObj;
     const history = createHistory({ forceRefresh: true });
-    if (!response.error) {
-      global.window.localStorage.setItem('profile', JSON.stringify(userProfile));
-      history.push('/#/news_home');
-      global.window.location.reload();
-    } else {
-      // alert('Google log in error');
-    }
+    localStorage.setItem('profile', JSON.stringify(userProfile));
+    history.push('/#/news_home');
+    window.location.reload();
   }
+
   /**
    * This method renders the components
    * @memberof Login
@@ -49,14 +43,18 @@ class Login extends React.Component {
     return (
       <div className="login-box">
         <div className="row collapse expanded">
-          <div className="small-12 medium-6 column small-order-2 medium-order-1">
+          <div
+            className="small-12 medium-6 column small-order-2 medium-order-1"
+          >
             <div className="login-box-form-section">
               <h1 className="login-box-title">Welcome to</h1>
               <h1>Bad News App</h1>
-              <h3 className="login-box-title">This website gives news all over the globe</h3>
+              <h3
+                className="login-box-title"
+              >This website gives news all over the globe
+            </h3>
 
             </div>
-            <div className="or">ENTER</div>
           </div>
           <div
             className="small-12 medium-6
@@ -66,14 +64,14 @@ class Login extends React.Component {
           >
             <div className="login-box-social-section-inner">
               <span className="login-box-social-headline">
-                Sign in with<br />your social network
+                Sign in with<br />Google+
               </span>
               <a className="login-box-social-button-google">
                 <GoogleLogin
                   clientId={process.env.GOOGLE_CLIENT_ID}
                   buttonText="Sign In"
-                  onSuccess={this.responseGoogle}
-                  onFailure={this.responseGoogle}
+                  onSuccess={this.saveGoogleCredentials}
+                  onFailure={this.saveGoogleCredentials}
                 ><img src={gplus} alt="G-login" /></GoogleLogin></a>
             </div>
           </div>

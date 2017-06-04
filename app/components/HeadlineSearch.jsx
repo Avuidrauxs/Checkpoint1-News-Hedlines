@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/expandable-search';
+import '../styles/components/js/expandable-search';
 
 /**
  * This component handles the Headline search input
@@ -72,6 +72,7 @@ class HeadlineSearch extends React.Component {
           placeholder="Enter a news source you want"
           value={this.state.searchText}
           onChange={this.handleSearch}
+          style={{ marginTop: '15px' }}
         />
       </div>
 
@@ -80,22 +81,12 @@ class HeadlineSearch extends React.Component {
   }
 
 }
+// Setting prop types for HeadlineList component as required by the React documentation
 HeadlineSearch.propTypes = {
   onSearch: PropTypes.func
 };
-
+// Setting default prop types as required by React Documentation
 HeadlineSearch.defaultProps = {
   onSearch: () => {}
 };
 export default HeadlineSearch;
-
-//
-// <div className="container__header">
-//   <div>
-//     <input
-//       type="text" placeholder="Enter a news source you want"
-//       value={this.state.searchText} onChange={this.handleSearch}
-//     />
-//   </div>
-//   <div />
-// </div>

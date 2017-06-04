@@ -1,20 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-
+/**
+ * This method is a stateless React function that renders all the components
+ * @param {object} props - contains parameters for component
+ * @returns {React.Component} - returns a react component
+ */
 const Main = props => (
   <div>
     {props.children}
   </div>
   );
 
+// Setting prop types for Main as required by React documentation
 Main.propTypes = {
-  children: PropTypes.oneOfType([
+  children: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(React.PropTypes.node),
     React.PropTypes.node
   ]).isRequired
 };
-Main.defaultProps = {
-  cheildren: {}
-};
+
 export default Main;
