@@ -35,7 +35,7 @@ class Nav extends Component {
   }
 
   /**
-   * This function handles the View Articles button
+   * This function handles the View Articles button event to fetch articles
    * @memberof Nav
    * @return {null} - returns nothing
    */

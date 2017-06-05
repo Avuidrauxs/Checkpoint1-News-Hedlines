@@ -35,6 +35,8 @@
         }
       ],
       "import/newline-after-import": 0,
+      "no-multi-assign": 0,
+      "import/no-extraneous-dependencies": 0,
       "no-shadow": ["error", { "allow": ["req", "res", "err"] } ],
       "valid-jsdoc": ["error", {
           "requireReturn": true,

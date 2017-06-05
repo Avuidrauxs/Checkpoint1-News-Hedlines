@@ -18,4 +18,4 @@ Object.defineProperty(window, 'localStorage', {
   value: localStorageMock
 });
 
-export default localStorageMock
+export default localStorageMock;
