@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import expects from 'expect';
-import { shallow, mount } from 'enzyme';
-import sinon from 'sinon';
-import createHistory from 'history/createBrowserHistory';
-import localStorage from '../__mock__/localStorageMock'
+import { shallow } from 'enzyme';
+
 
 import Login from '../../components/Login';
 
@@ -13,15 +10,10 @@ describe('Login', () => {
     expects(Login).toExist();
   });
   it('renders without crashing', () => {
-       const wrapper = shallow(<Login/>);
-   });
-   it('should access login method',() => {
-     const response = {profileObj: {
-       givenName: 'audax',
-       email: 'audax@fap.com'
-     }
-  }
-     const login = new Login();
-     expect(login.saveGoogleCredentials).toBeInstanceOf(Function);
-   });
+    shallow(<Login />);
+  });
+  it('should access login method', () => {
+    const login = new Login();
+    expect(login.saveGoogleCredentials).toBeInstanceOf(Function);
+  });
 });
