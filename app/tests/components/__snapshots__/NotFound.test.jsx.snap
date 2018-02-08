@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound should render a snapshot 1`] = `
+<div
+  className="centered"
+>
+  <h1>
+    404 - Page Not Found
+  </h1>
+  <p>
+    No page of that sort exists
+  </p>
+</div>
+`;

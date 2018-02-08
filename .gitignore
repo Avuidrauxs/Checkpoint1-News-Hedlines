@@ -37,7 +37,12 @@ jspm_packages
 .node_repl_history
 
 #Webpack Bundled file
-public/bundle.js
+
 
 #Miscellaneous
 .DS_Store
+.env
+
+#lcov-report
+lcov-report
+lcov.info

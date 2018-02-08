@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import HeadlineItem from './HeadlineItem';
 
 /**
@@ -9,44 +8,49 @@ import HeadlineItem from './HeadlineItem';
  * @type {Object}
  */
 class HeadlineList extends React.Component {
+
+  /**
+   * HeadlineList constructor method
+   * @param  {array} props - contains prop parameters
+   * @return {null}  - returns nothing
+   */
+  constructor(props) {
+    super(props);
+    this.renderHeadlines = this.renderHeadlines.bind(this);
+  }
+
+/**
+ * This method renders the news healine sources into a list
+ * @memberof {HeadlineList}
+ * @return {[type]} [description]
+ */
+  renderHeadlines() {
+    const { sources } = this.props;
+    return sources.map(source => (
+      <HeadlineItem
+        key={source.id}
+        {...source}
+      />
+        ));
+  }
 /**
  * This renders the hierachy of views for this component
- * @memberof HeadlineList
+ * @memberof {HeadlineList}
  * @return {React.Component} - returns react component
  */
   render() {
-    const { sources } = this.props;
-    const renderHeadlines = () => sources.map((source) => {
-      if (source.sortBysAvailable.indexOf('latest') > 0) {
-        return (
-          <HeadlineItem
-            key={source.id}
-            {...source}
-            onClickURL={this.handleGoToArticles}
-            showLatest={false}
-          />
-        );
-      }
-      return (
-        <HeadlineItem
-          key={source.id}
-          {...source}
-          onClickURL={this.handleGoToArticles}
-          showLatest
-        />);
-    });
-
     return (
       <div>
-        {renderHeadlines()}
+        {this.renderHeadlines()}
       </div>
     );
   }
 }
+// Setting prop types for HeadlineList component as required by the React documentation
 HeadlineList.propTypes = {
-  sources: PropTypes.array
+  sources: React.PropTypes.arrayOf(React.PropTypes.object)
 };
-
+// Setting default prop types as required by React Documentation
 HeadlineList.defaultProps = {
   sources: []
 };

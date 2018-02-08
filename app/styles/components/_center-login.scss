@@ -4,4 +4,15 @@
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
+  justify-content: flex-end;
+}
+
+.menu-left {
+  margin-left: 28%;
+    width: 100%;
+}
+
+.menu-right {
+  margin-right: 28%;
+    width: 100%;
 }

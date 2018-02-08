@@ -1,40 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import expect from 'expect';
+import sinon from 'sinon';
+import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
+import expects from 'expect';
 
 
 import HeadlineList from '../../components/HeadlineList';
-import HeadlineItem from '../../components/HeadlineItem';
+
 
 describe('Headlines List', () => {
   it('should exist', () => {
-    expect(HeadlineList).toExist();
+    expects(HeadlineList).toExist();
   });
-  // it('should render one or more Headline components for each news source', () => {
-  //   const sources = [{
-  //     id: 1,
-  //     name: 'CNN',
-  //     description: 'ISIS are here finally',
-  //     url: '#'},
-  //     {
-  //     id: 2,
-  //     name: 'IGN',
-  //     description: 'No man sky is freaking scam',
-  //     url:'#'
-  //   }];
-  //   const store = configureStore({
-  //     sources
-  //   });
-  //
-  //   const provider = TestUtils.renderIntoDocument(
-  //     <Provider store={store}>
-  //       <ConnectedHeadlineList/>
-  //     </Provider>
-  //   );
-  //   const headlineList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedHeadlineList)[0];
-  //   const headlineComponents = TestUtils.scryRenderedComponentsWithType(headlineList, ConnectedHeadlineItem);
-  //
-  //   expect(headlineComponents.length).toBe(sources.length);
-  // })
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<HeadlineList />, div);
+  });
+  it('should render a snapshot', () => {
+    const tree = renderer.create(<HeadlineList />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  it('should call "renderHeadlines" only when component is rendered ', () => {
+    const spy = sinon.stub(HeadlineList.prototype, 'renderHeadlines');
+    const wrapper = shallow(<HeadlineList />);
+    wrapper.instance().renderHeadlines();
+    expect(spy.calledOnce).toBe(false);
+  });
 });

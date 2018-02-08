@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import expect from 'expect';
+import renderer from 'react-test-renderer';
+import expects from 'expect';
 
 
 import Main from '../../components/Main';
 
-describe('Main', ()=>{
-  it('should exist', ()=>{
-    expect(Main).toExist();
-  })
-})
+describe('Main', () => {
+  it('should exist', () => {
+    expects(Main).toExist();
+  });
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<Main />, div);
+  });
+  it('should render a snapshot', () => {
+    const tree = renderer.create(<Main />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

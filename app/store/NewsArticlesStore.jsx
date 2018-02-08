@@ -4,10 +4,10 @@ import Dispatcher from '../dispatcher';
 /**
  *Listens and stores data from the action according to their action type
  *
- * @class ArticleStore
+ * @class NewsArticleStore
  * @extends {EventEmitter}
  */
-class ArticlesStore extends EventEmitter {
+class NewsArticlesStore extends EventEmitter {
   /**
    * ArticleStore constructor
    * @return {null} - returns no value
@@ -15,17 +15,19 @@ class ArticlesStore extends EventEmitter {
   constructor() {
     super();
     this.articles = [];
+    this.articleSource = '';
     this.getAllNewsArticles = this.getAllNewsArticles.bind(this);
   }
 
 /**
  * this method just sets ths articles store with articles
  * @memberof ArticlesStore
- * @return {null} - returns no value
+ * @return {array} - returns an array of articles
  */
   getAllNewsArticles() {
-    return this.articles;
+    return { articles: this.articles, articleSource: this.articleSource };
   }
+
   /**
    * This function listens for payLoad from the action and stores them
    * according to their action type.
@@ -36,7 +38,8 @@ class ArticlesStore extends EventEmitter {
   handleActions(action) {
     switch (action.type) {
       case 'FETCH_ALL_ARTICLES':
-        this.articles = action.articles;
+        this.articles = action.articles.articleList;
+        this.articleSource = action.articles.articleSource;
         this.emit('change');
         break;
       default:
@@ -45,7 +48,7 @@ class ArticlesStore extends EventEmitter {
 
 }
 
-const articlesStore = new ArticlesStore();
+const articlesStore = new NewsArticlesStore();
 Dispatcher.register(articlesStore.handleActions.bind(articlesStore));
 
 export default articlesStore;

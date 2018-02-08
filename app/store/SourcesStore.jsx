@@ -17,14 +17,16 @@ class SourcesStore extends EventEmitter {
     this.sources = [];
     this.getAllNewsSources = this.getAllNewsSources.bind(this);
   }
+
   /**
    * this method just sets ths sources store with sources
    * @memberof SourcesStore
-   * @return {null} - returns no value
+   * @return {array} - returns an array of news sources
    */
   getAllNewsSources() {
     return this.sources;
   }
+
   /**
    * This function listens for payLoad from the action and stores them
    * according to their action type.

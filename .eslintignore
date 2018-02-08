@@ -1,5 +1,5 @@
 public/bundle.js
 webpack.config.js
-karma.conf.js
-app/tests
+
 app/styles
+jest.config.js
